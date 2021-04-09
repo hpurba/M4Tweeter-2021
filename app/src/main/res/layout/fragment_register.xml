@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/et_firstName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="First Name"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="15dp"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/et_lastName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Last Name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="15dp"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/et_username2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/usernameAT"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="15dp"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/et_password2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/password"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="15dp"
+        android:inputType="textPassword"
+        android:textSize="15sp"
+        android:autofillHints="@string/password"/>
+
+
+    <Button
+        android:id="@+id/TakeProfilePictureButton"
+        android:layout_marginTop="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/take_profile_picture"
+        android:layout_gravity="center"
+        android:onClick="takePicture"
+        android:textColor="@android:color/holo_red_dark"
+        android:background="@android:color/transparent"/>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/RegisterButton"
+        android:layout_marginTop="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

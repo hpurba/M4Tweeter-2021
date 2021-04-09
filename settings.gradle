@@ -1,0 +1,4 @@
+include ':shared'
+include ':server'
+include ':app'
+rootProject.name='Tweeter'

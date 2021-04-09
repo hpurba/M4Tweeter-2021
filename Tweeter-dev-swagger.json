@@ -1,0 +1,962 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-03-24T20:03:40Z",
+    "title": "Tweeter"
+  },
+  "host": "yz55y6hm7b.execute-api.us-west-2.amazonaws.com",
+  "basePath": "/dev",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/feedtweets": {
+      "post": {
+        "description": "This method retrieves the feed of tweets for a specified user.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "FeedTweetsRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeedTweetsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/FeedTweetsResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/followers": {
+      "post": {
+        "description": "This method retrieves the followers of a given user in the request. Returns a list of followers.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "FollowerRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/FollowerRequest"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/following": {
+      "post": {
+        "description": "This method retrieves the followees of a given user indicated in the request. Returns a list of followees.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "FollowingRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/FollowingResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/followuser": {
+      "post": {
+        "description": "This method will allow the current user to follow a different user. Part of the functionality of the follow/unfollow button.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "FollowingStatusRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowingStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/FollowingStatusResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/loginuser": {
+      "post": {
+        "description": "This method logs in a user.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "LoginRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "description": "This method logs a user out and removes the auth token from the database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "LogoutRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogoutRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/LogoutResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/registeruser": {
+      "post": {
+        "description": "This method registers a new user and adds the info to the database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "RegisterRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/RegisterResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/storytweets": {
+      "post": {
+        "description": "This method retrieves all the tweets made by a user to put into the story fragment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "StoryTweetsRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoryTweetsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/StoryTweetsResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/tweet": {
+      "post": {
+        "description": "This method posts a tweet",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "TweetRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TweetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/TweetResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/unfollowuser": {
+      "post": {
+        "description": "This method unfollows a user from the currently logged in user's account",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "FollowingStatusRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowingStatusRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/FollowingStatusResponse"
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegisterRequest": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "The User's first name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The User's last name"
+        },
+        "alias": {
+          "type": "string",
+          "description": "The User's alias"
+        },
+        "byteArray": {
+          "type": "string",
+          "description": "The User's byte array"
+        },
+        "password": {
+          "type": "string",
+          "description": "The User's password"
+        }
+      },
+      "title": "RegisterRequest"
+    },
+    "LoginResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        },
+        "authToken": {
+          "type": "object",
+          "properties": {
+            "authToken": {
+              "type": "string",
+              "description": "the logged in user's authtoken"
+            }
+          }
+        }
+      },
+      "title": "LoginResponse"
+    },
+    "LogoutResponse": {
+      "type": "object",
+      "title": "LogoutResponse"
+    },
+    "FeedTweetsRequest": {
+      "type": "object",
+      "properties": {
+        "tweet": {
+          "type": "object",
+          "properties": {
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "tweetText": {
+              "type": "string",
+              "description": "The User's tweet as text"
+            },
+            "userName": {
+              "type": "string",
+              "description": "The User's username"
+            }
+          }
+        },
+        "limit": {
+          "type": "number",
+          "description": "The User's username"
+        },
+        "lastTweet": {
+          "type": "object",
+          "properties": {
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "tweetText": {
+              "type": "string",
+              "description": "The User's tweet as text"
+            },
+            "userName": {
+              "type": "string",
+              "description": "The User's username"
+            }
+          }
+        }
+      },
+      "title": "FeedTweetsRequest"
+    },
+    "FollowingRequest": {
+      "type": "object",
+      "properties": {
+        "follower": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        },
+        "limit": {
+          "type": "number"
+        },
+        "lastFollowee": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        }
+      },
+      "title": "FollowingRequest"
+    },
+    "StoryTweetsResponse": {
+      "type": "object",
+      "properties": {
+        "tweets": {
+          "type": "array",
+          "description": "The User's tweets",
+          "items": {
+            "type": "object",
+            "properties": {
+              "alias": {
+                "type": "string",
+                "description": "The User's alias"
+              },
+              "tweetText": {
+                "type": "string",
+                "description": "The User's tweet as text"
+              },
+              "userName": {
+                "type": "string",
+                "description": "The User's username"
+              }
+            }
+          }
+        }
+      },
+      "title": "StoryTweetsResponse"
+    },
+    "FollowingStatusResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string"
+        },
+        "following": {
+          "type": "boolean",
+          "description": "true or false bool for follow and unfollow."
+        }
+      },
+      "title": "FollowingStatusResponse"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "Error Schema"
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The User's username"
+        },
+        "password": {
+          "type": "string",
+          "description": "The User's password"
+        }
+      },
+      "title": "LoginRequest"
+    },
+    "TweetResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        }
+      },
+      "title": "TweetResponse"
+    },
+    "FollowerRequest": {
+      "type": "object",
+      "properties": {
+        "followee": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        },
+        "limit": {
+          "type": "string"
+        },
+        "lastFollower": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        }
+      },
+      "title": "FollowerRequest"
+    },
+    "RegisterResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        },
+        "authToken": {
+          "type": "object",
+          "properties": {
+            "authToken": {
+              "type": "string",
+              "description": "the logged in user's authtoken"
+            }
+          }
+        }
+      },
+      "title": "RegisterResponse"
+    },
+    "FollowingStatusRequest": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "description": "The User's firstname"
+            },
+            "lastname": {
+              "type": "string",
+              "description": "The User's lastname"
+            },
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "The User's image as a url"
+            },
+            "imageBytes": {
+              "type": "string",
+              "description": "The User's image in a byteArray"
+            }
+          }
+        },
+        "myUsername": {
+          "type": "string"
+        },
+        "otherPersonUsername": {
+          "type": "string"
+        },
+        "isFollowing": {
+          "type": "boolean"
+        }
+      },
+      "title": "FollowingStatusRequest"
+    },
+    "LogoutRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The User's username"
+        }
+      },
+      "title": "LogoutRequest"
+    },
+    "StoryTweetsRequest": {
+      "type": "object",
+      "properties": {
+        "tweet": {
+          "type": "object",
+          "properties": {
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "tweetText": {
+              "type": "string",
+              "description": "The User's tweet as text"
+            },
+            "userName": {
+              "type": "string",
+              "description": "The User's username"
+            }
+          }
+        },
+        "limit": {
+          "type": "string",
+          "description": "The User's username"
+        },
+        "lastTweet": {
+          "type": "object",
+          "properties": {
+            "alias": {
+              "type": "string",
+              "description": "The User's alias"
+            },
+            "tweetText": {
+              "type": "string",
+              "description": "The User's tweet as text"
+            },
+            "userName": {
+              "type": "string",
+              "description": "The User's username"
+            }
+          }
+        }
+      },
+      "title": "StoryTweetsRequest"
+    },
+    "TweetRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The User's username"
+        },
+        "tweetText": {
+          "type": "string",
+          "description": "The User's tweet's text"
+        }
+      },
+      "title": "TweetRequest"
+    },
+    "FeedTweetsResponse": {
+      "type": "object",
+      "properties": {
+        "tweets": {
+          "type": "array",
+          "description": "The User's tweets",
+          "items": {
+            "type": "object",
+            "properties": {
+              "alias": {
+                "type": "string",
+                "description": "The User's alias"
+              },
+              "tweetText": {
+                "type": "string",
+                "description": "The User's tweet as text"
+              },
+              "userName": {
+                "type": "string",
+                "description": "The User's username"
+              }
+            }
+          }
+        }
+      },
+      "title": "FeedTweetsResponse"
+    },
+    "FollowingResponse": {
+      "type": "object",
+      "properties": {
+        "followees": {
+          "type": "array",
+          "description": "The User's followers",
+          "items": {
+            "type": "object",
+            "properties": {
+              "firstname": {
+                "type": "string",
+                "description": "The User's firstname"
+              },
+              "lastname": {
+                "type": "string",
+                "description": "The User's lastname"
+              },
+              "alias": {
+                "type": "string",
+                "description": "The User's alias"
+              },
+              "imageUrl": {
+                "type": "string",
+                "description": "The User's image as a url"
+              },
+              "imageBytes": {
+                "type": "string",
+                "description": "The User's image in a byteArray"
+              }
+            }
+          }
+        }
+      },
+      "title": "FollowingResponse"
+    }
+  }
+}

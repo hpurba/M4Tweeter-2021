@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="500dp"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal">
+
+
+<!--        // THIS NEEDS TO BE AN IMAGE VIEW!!!-->
+        <ImageView
+            android:id="@+id/tweetProfilePictureImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/userFirstNameLastNameInTweetWindow"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:textSize="12dp"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:text="Test User"/>
+
+            <TextView
+                android:id="@+id/userAliasInTweetWindow"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:textSize="12dp"
+                android:text="TestUserAlias"/>
+
+        </LinearLayout>
+
+
+<!--        <Button-->
+<!--            android:id="@+id/et_exitTweetButton"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:text="@string/close"-->
+<!--            android:background="#1DA1F2"-->
+<!--            android:textColor="#FFFFFF"/>-->
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_tweetText"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:hint="@string/whatsOnYourMind"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="15dp"
+        android:textSize="15sp"/>
+
+
+    <Button
+        android:id="@+id/et_postTweetButton"
+        android:layout_marginTop="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/postStatus"
+        android:background="#1DA1F2"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+</LinearLayout>
+
+<!--<RelativeLayout-->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:background="#62def8">-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_margin="30dp"-->
+<!--        android:textSize="22sp"-->
+<!--        android:text="This is a popup window."/>-->
+
+<!--</RelativeLayout>-->
