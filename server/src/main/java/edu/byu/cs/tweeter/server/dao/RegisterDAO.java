@@ -7,6 +7,7 @@ import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
 
 public class RegisterDAO {
 
+    // Dummy Data
     private static final String MALE_IMAGE_URL = "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png";
     private final User user1 = new User("firstname", "lastname", MALE_IMAGE_URL);
 

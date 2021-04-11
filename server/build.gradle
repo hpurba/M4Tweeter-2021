@@ -8,6 +8,10 @@ dependencies {
     implementation group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.2.1'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
     testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+
+    implementation 'com.amazonaws:aws-java-sdk-sqs:1.11.761'
+    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
+    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.761'
 }
 
 //plugins {

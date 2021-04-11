@@ -50,4 +50,8 @@ public class RegisterRequest {
     public byte[] getByteArray() {
         return byteArray;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

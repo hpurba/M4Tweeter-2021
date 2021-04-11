@@ -13,7 +13,21 @@ import edu.byu.cs.tweeter.server.service.RegisterServiceImpl;
 public class RegisterHandler implements RequestHandler<RegisterRequest, RegisterResponse> {
     @Override
     public RegisterResponse handleRequest(RegisterRequest registerRequest, Context context) {
+
+//        if (registerRequest.getFirstName().isEmpty() || registerRequest.getFirstName() == null
+//                || registerRequest.getLastName().isEmpty() || registerRequest.getLastName() == null
+//                || registerRequest.getAlias().isEmpty() || registerRequest.getAlias() == null
+//                || registerRequest.getPassword().isEmpty() || registerRequest.getPassword() == null
+//                || registerRequest.getByteArray().length == 0 || registerRequest.getByteArray() == null) {
+//            throw new RuntimeException("[BadRequest400] 400");
+//        }
+
         RegisterServiceImpl registerService = new RegisterServiceImpl();
-        return registerService.register(registerRequest);
+        try {
+            return registerService.register(registerRequest);
+        } catch (Exception e) {
+//            System.out.println(e.toString());
+            throw new RuntimeException("[BadRequest500] 500");
+        }
     }
 }
