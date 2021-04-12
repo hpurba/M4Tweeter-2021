@@ -61,7 +61,7 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
      * @param authToken the auth token for this user's session.
      * @return the fragment.
      */
-    public static FollowingFragment newInstance(User user, AuthToken authToken) {
+    public static FollowingFragment newInstance(User user, String authToken) {
         FollowingFragment fragment = new FollowingFragment();
 
         Bundle args = new Bundle(2);
@@ -79,7 +79,7 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
 
         //noinspection ConstantConditions
         user = (User) getArguments().getSerializable(USER_KEY);
-        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
+//        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
 
         presenter = new FollowingPresenter(this);
 

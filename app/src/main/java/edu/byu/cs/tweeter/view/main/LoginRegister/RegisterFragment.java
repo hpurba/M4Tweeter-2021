@@ -184,13 +184,15 @@ public class RegisterFragment extends Fragment implements RegisterPresenter.View
         return password;
     }
 
+    /**
+     * This encodes the byte[] byteArray to and String encodedByteArray
+     * Link on how to encode and decode.
+     * https://stackoverflow.com/questions/2418485/how-do-i-convert-a-byte-array-to-base64-in-java
+     * @return
+     */
     @Override
     public String getByteArray() {
-//        String encodedByteArray = Base64.getEncoder().encodeToString(byteArray);
         String encodedByteArray = Base64.getEncoder().encodeToString(byteArray);
-
-//        String encodedByteArray = Base64.getEncoder().encodeToString(byteArray.getBytes());
         return encodedByteArray;
-//        return byteArray;
     }
 }

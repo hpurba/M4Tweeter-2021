@@ -92,8 +92,9 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
             followerNumCount = user.getFollowersCount();
             followingNumCount = user.getFollowingCount();
         }
-        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
+//        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
 
+        String authToken = "MadeUpAuthTokenInMainActivity";
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), user, authToken);
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);

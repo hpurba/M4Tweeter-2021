@@ -46,7 +46,7 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
     private static final int PAGE_SIZE = 10;
 
     private User user;
-    private AuthToken authToken;
+    private String authToken;
     private FollowerPresenter presenter;
     private FollowersFragment followersFragment;
     private OtherUserProfilePresenter presenterNext;
@@ -63,7 +63,7 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
      * @param authToken the auth token for this user's session.
      * @return the fragment.
      */
-    public static FollowersFragment newInstance(User user, AuthToken authToken) {
+    public static FollowersFragment newInstance(User user, String authToken) {
         FollowersFragment fragment = new FollowersFragment();
 
         Bundle args = new Bundle(2);
@@ -81,7 +81,7 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
 
         //noinspection ConstantConditions
         user = (User) getArguments().getSerializable(USER_KEY);
-        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
+//        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
 
         rootView = this.getView();
 

@@ -32,7 +32,7 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
         }
         // Byte Array is length 0
         if(registerRequest.getByteArray() == null) {
-            throw new RuntimeException("[BadRequest400] 400. ByteArray length = 0. ByteArray length:" + registerRequest.getByteArray());
+            throw new RuntimeException("[BadRequest400] 400. ByteArray is null:" + registerRequest.getByteArray());
         }
 
 
@@ -46,7 +46,7 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
     }
 }
 
-
+// This is used to test the API Gateway
 /*
 {
     "firstName": "hikaru",
@@ -57,35 +57,7 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
 }
  */
 
-
-
-//        if (registerRequest.getFirstName() == null
-//                || registerRequest.getLastName() == null
-//                || registerRequest.getAlias() == null
-//                || registerRequest.getPassword() == null
-//                || registerRequest.getByteArray().length == 0) {
-//            throw new RuntimeException("[BadRequest400] 400");
-//        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Condensed version of what I have up top.
 //        if (registerRequest.getFirstName().isEmpty() || registerRequest.getFirstName() == null
 //                || registerRequest.getLastName().isEmpty() || registerRequest.getLastName() == null
 //                || registerRequest.getAlias().isEmpty() || registerRequest.getAlias() == null

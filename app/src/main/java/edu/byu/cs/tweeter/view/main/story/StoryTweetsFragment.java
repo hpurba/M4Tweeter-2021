@@ -40,7 +40,7 @@ public class StoryTweetsFragment  extends Fragment implements StoryTweetsPresent
     private Tweet tweet;
     private StoryTweetsPresenter presenter;
     private User user;
-    private AuthToken authToken;
+    private String authToken;
     private StoryTweetsFragment.StoryTweetsRecyclerViewAdapter storyTweetsRecyclerViewAdapter;
 
     /**
@@ -50,7 +50,7 @@ public class StoryTweetsFragment  extends Fragment implements StoryTweetsPresent
      * @param user the logged in user.
      * @return the fragment.
      */
-    public static StoryTweetsFragment newInstance(User user, AuthToken authToken) {
+    public static StoryTweetsFragment newInstance(User user, String authToken) {
         StoryTweetsFragment fragment = new StoryTweetsFragment();
         Bundle args = new Bundle(2);
         args.putSerializable(USER_KEY, user);
@@ -68,7 +68,7 @@ public class StoryTweetsFragment  extends Fragment implements StoryTweetsPresent
 
         //noinspection ConstantConditions
         user = (User) getArguments().getSerializable(USER_KEY);
-        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
+//        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
 
         presenter = new StoryTweetsPresenter(this);
 

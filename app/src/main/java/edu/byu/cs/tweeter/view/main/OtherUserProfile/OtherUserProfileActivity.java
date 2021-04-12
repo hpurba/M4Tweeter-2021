@@ -68,8 +68,9 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
 
         // Get the User and passed on authtoken
         user = (User) getIntent().getSerializableExtra(CURRENT_USER_KEY);
-        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
+//        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
 
+        String authToken = "MadeUpAuthTokenFromOtherUserProfileActivity";
         OtherUserSectionsPagerAdapter sectionsPagerAdapter = new OtherUserSectionsPagerAdapter(this, getSupportFragmentManager(), user, authToken);
         myViewPager = (ViewPager) findViewById(R.id.otherUser_view_pager);
         tabLayout = (TabLayout) findViewById(R.id.otherUser_tabs);

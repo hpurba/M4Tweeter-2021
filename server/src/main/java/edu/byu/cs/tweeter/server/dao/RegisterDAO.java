@@ -1,5 +1,7 @@
 package edu.byu.cs.tweeter.server.dao;
 
+import java.util.UUID;
+
 import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
@@ -23,7 +25,8 @@ public class RegisterDAO {
                 MALE_IMAGE_URL);
 //        user.setImageBytes(byteArray);
 
-        AuthToken authToken = new AuthToken();
+
+        String authToken = UUID.randomUUID().toString();
         RegisterResponse registerResponse = new RegisterResponse(user1, authToken);
         return registerResponse;
     }

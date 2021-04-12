@@ -22,10 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.byu.cs.tweeter.R;
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.Tweet;
 import edu.byu.cs.tweeter.model.domain.User;
-import edu.byu.cs.tweeter.model.service.request.FeedTweetsRequest;
 import edu.byu.cs.tweeter.model.service.response.FeedTweetsResponse;
 import edu.byu.cs.tweeter.presenter.FeedTweetsPresenter;
 import edu.byu.cs.tweeter.view.asyncTasks.GetFeedTweetsTask;
@@ -41,7 +39,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
     private static final int PAGE_SIZE = 8; // Number of items for each scrolling pagination.
 
     private User user;
-    private AuthToken authToken;
+    private String authToken;
     private Tweet tweet;
     private FeedTweetsPresenter presenter;
 
@@ -54,7 +52,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
      * @param user the logged in user.
      * @return the fragment.
      */
-    public static FeedTweetsFragment newInstance(User user, AuthToken authToken) {
+    public static FeedTweetsFragment newInstance(User user, String authToken) {
         FeedTweetsFragment fragment = new FeedTweetsFragment();
         Bundle args = new Bundle(2);
         args.putSerializable(USER_KEY, user);
@@ -69,7 +67,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
 
         //noinspection ConstantConditions
         user = (User) getArguments().getSerializable(USER_KEY);
-        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
+//        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
 
         presenter = new FeedTweetsPresenter(this);
 
