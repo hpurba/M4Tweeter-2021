@@ -26,7 +26,8 @@ public class RegisterPresenter {
         String getLastName();
         String getAlias();
         String getPassword();
-        byte[] getByteArray();
+//        byte[] getByteArray();
+        String getByteArray();
     }
 
     /**

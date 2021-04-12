@@ -14,13 +14,27 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
     @Override
     public RegisterResponse handleRequest(RegisterRequest registerRequest, Context context) {
 
-//        if (registerRequest.getFirstName().isEmpty() || registerRequest.getFirstName() == null
-//                || registerRequest.getLastName().isEmpty() || registerRequest.getLastName() == null
-//                || registerRequest.getAlias().isEmpty() || registerRequest.getAlias() == null
-//                || registerRequest.getPassword().isEmpty() || registerRequest.getPassword() == null
-//                || registerRequest.getByteArray().length == 0 || registerRequest.getByteArray() == null) {
-//            throw new RuntimeException("[BadRequest400] 400");
-//        }
+        // FirstName
+        if(registerRequest.getFirstName() == null) {
+            throw new RuntimeException("[BadRequest400] 400. FirstName is null:" + registerRequest.getFirstName());
+        }
+        // LastName
+        if(registerRequest.getLastName() == null) {
+            throw new RuntimeException("[BadRequest400] 400. LastName is null:" + registerRequest.getLastName());
+        }
+        // Alias
+        if(registerRequest.getAlias() == null) {
+            throw new RuntimeException("[BadRequest400] 400. Alias is null:" + registerRequest.getAlias());
+        }
+        // Password
+        if(registerRequest.getPassword() == null) {
+            throw new RuntimeException("[BadRequest400] 400. Password is null:" + registerRequest.getPassword());
+        }
+        // Byte Array is length 0
+        if(registerRequest.getByteArray() == null) {
+            throw new RuntimeException("[BadRequest400] 400. ByteArray length = 0. ByteArray length:" + registerRequest.getByteArray());
+        }
+
 
         RegisterServiceImpl registerService = new RegisterServiceImpl();
         try {
@@ -31,3 +45,51 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
         }
     }
 }
+
+
+/*
+{
+    "firstName": "hikaru",
+    "lastName": "purba",
+    "alias": "hpurba",
+    "byteArray": null,
+    "password": "asdf"
+}
+ */
+
+
+
+//        if (registerRequest.getFirstName() == null
+//                || registerRequest.getLastName() == null
+//                || registerRequest.getAlias() == null
+//                || registerRequest.getPassword() == null
+//                || registerRequest.getByteArray().length == 0) {
+//            throw new RuntimeException("[BadRequest400] 400");
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        if (registerRequest.getFirstName().isEmpty() || registerRequest.getFirstName() == null
+//                || registerRequest.getLastName().isEmpty() || registerRequest.getLastName() == null
+//                || registerRequest.getAlias().isEmpty() || registerRequest.getAlias() == null
+//                || registerRequest.getPassword().isEmpty() || registerRequest.getPassword() == null
+//                || registerRequest.getByteArray().length == 0 || registerRequest.getByteArray() == null) {
+//            throw new RuntimeException("[BadRequest400] 400");
+//        }

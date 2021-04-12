@@ -10,16 +10,18 @@ public class RegisterDAO {
     // Dummy Data
     private static final String MALE_IMAGE_URL = "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png";
     private final User user1 = new User("firstname", "lastname", MALE_IMAGE_URL);
+    // {"success":true,"user":{"firstName":"firstname","lastName":"lastname","alias":"@firstnamelastname","imageUrl":"https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png","followersCount":0,"followingCount":0,"name":"firstname lastname"},"authToken":{}}
+
 
     public RegisterResponse register(RegisterRequest request) {
 
-        byte[] byteArray = request.getByteArray();
+//        String byteArray = request.getByteArray();
 
         User user = new User(request.getFirstName(),
                 request.getLastName(),
                 request.getAlias(),
                 MALE_IMAGE_URL);
-        user.setImageBytes(byteArray);
+//        user.setImageBytes(byteArray);
 
         AuthToken authToken = new AuthToken();
         RegisterResponse registerResponse = new RegisterResponse(user1, authToken);

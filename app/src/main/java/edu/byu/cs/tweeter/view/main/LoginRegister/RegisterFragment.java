@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Base64;
 
 import edu.byu.cs.tweeter.R;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
@@ -184,7 +185,12 @@ public class RegisterFragment extends Fragment implements RegisterPresenter.View
     }
 
     @Override
-    public byte[] getByteArray() {
-        return byteArray;
+    public String getByteArray() {
+//        String encodedByteArray = Base64.getEncoder().encodeToString(byteArray);
+        String encodedByteArray = Base64.getEncoder().encodeToString(byteArray);
+
+//        String encodedByteArray = Base64.getEncoder().encodeToString(byteArray.getBytes());
+        return encodedByteArray;
+//        return byteArray;
     }
 }
