@@ -3,6 +3,7 @@ package edu.byu.cs.tweeter.presenter;
 import java.io.IOException;
 
 import edu.byu.cs.tweeter.model.domain.Tweet;
+import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.FeedTweetsService;
 import edu.byu.cs.tweeter.model.service.FollowerService;
 import edu.byu.cs.tweeter.model.service.request.FeedTweetsRequest;
@@ -19,7 +20,7 @@ public class FeedTweetsPresenter {
      *  - If needed, specify methods here that will be called on the view in response to model updates.
      */
     public interface View {
-        Tweet getTweet();
+        User getUser();
         int getPageSize();
         Tweet getLastTweet();
         String getAuthToken();
@@ -39,7 +40,7 @@ public class FeedTweetsPresenter {
      * @throws IOException
      */
     public FeedTweetsResponse getFeedTweets() throws IOException {
-        FeedTweetsRequest request = new FeedTweetsRequest(view.getTweet(), view.getPageSize(), view.getLastTweet(), view.getAuthToken());
+        FeedTweetsRequest request = new FeedTweetsRequest(view.getUser(), view.getPageSize(), view.getLastTweet(), view.getAuthToken());
         FeedTweetsService feedTweetsService = getFeedTweetsService();
         return feedTweetsService.getFeedTweets(request);
     }

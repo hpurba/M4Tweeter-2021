@@ -36,7 +36,7 @@ public class LoginServiceImpl extends ServiceImpl implements ILoginService {
             response.setAuthToken(authToken);
         }
 
-        return new UsersDAO().login(request);
+        return response;
     }
 }
 

@@ -1,10 +1,12 @@
 package edu.byu.cs.tweeter.model.service.request;
 
 import edu.byu.cs.tweeter.model.domain.Tweet;
+import edu.byu.cs.tweeter.model.domain.User;
 
 public class FeedTweetsRequest {
 
-    private Tweet tweet;
+
+    private User user;
     private int limit;
     private Tweet lastTweet;
     private String authToken;
@@ -14,17 +16,17 @@ public class FeedTweetsRequest {
      */
     public FeedTweetsRequest() { }
 
+
     /**
      * Creates an instance.
      *
-     * @param tweet the {@link Tweet} whose tweet are to be returned.
+     * @param user
      * @param limit the maximum number of followers to return.
-     * @param tweet the last tweet that was returned in the previous request (null if
-     *                     there was no previous request or if no followers were returned in the
-     *                     previous request).
+     * @param lastTweet the last tweet that was returned in the previous request (null if there was no previous request or if no followers were returned in the previous request).
+     * @param authToken the authToken
      */
-    public FeedTweetsRequest(Tweet tweet, int limit, Tweet lastTweet, String authToken) {
-        this.tweet = tweet;
+    public FeedTweetsRequest(User user, int limit, Tweet lastTweet, String authToken) {
+        this.user = user;
         this.limit = limit;
         this.lastTweet = lastTweet;
         this.authToken = authToken;
@@ -35,8 +37,8 @@ public class FeedTweetsRequest {
      *
      * @return the followee.
      */
-    public Tweet getTweet() {
-        return tweet;
+    public User getUser() {
+        return user;
     }
 
     /**
@@ -58,8 +60,8 @@ public class FeedTweetsRequest {
         return lastTweet;
     }
 
-    public void setTweet(Tweet tweet) {
-        this.tweet = tweet;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setLimit(int limit) {

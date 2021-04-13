@@ -50,13 +50,11 @@ public class GetFeedTweetsTask extends AsyncTask<FeedTweetsRequest, Void, FeedTw
     @Override
     protected FeedTweetsResponse doInBackground(FeedTweetsRequest... feedTweetsRequests) {
         FeedTweetsResponse response = null;
-
         try {
             response = presenter.getFeedTweets();
         } catch (IOException ex) {
             exception = ex;
         }
-
         return response;
     }
 

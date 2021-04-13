@@ -62,8 +62,8 @@ import edu.byu.cs.tweeter.view.util.ImageUtils;
  */
 public class MainActivity extends AppCompatActivity implements LogoutPresenter.View, LogoutTask.Observer, TweetPresenter.View, TweetTask.Observer {
 
-    public static String CURRENT_USER_KEY = "CurrentUser";
-    public static String AUTH_TOKEN_KEY = "AuthTokenKey";
+    public static User CURRENT_USER_KEY;
+    public static String AUTH_TOKEN_KEY;
 //    public static final String FOLLOWING_BOOL = "followingBool";
 
     private LogoutPresenter logoutPresenter;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         logoutPresenter = new LogoutPresenter(this); // maybe change this to view
         tweetPresenter = new TweetPresenter(this);
 
-        user = (User) getIntent().getSerializableExtra(CURRENT_USER_KEY);
+        user = (User) getIntent().getSerializableExtra("CURRENT_USER_KEY");
         user = getUser();
 
         if(user == null) {
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
     }
 
     public String getAuthToken() {
-        return getIntent().getStringExtra("AUTH_TOKEN_KEY");
+        return (String) getIntent().getSerializableExtra("AUTH_TOKEN_KEY");
     }
 
     public User getUser() {
@@ -332,7 +332,9 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
         Tweet tweet = new Tweet(user, tweetText, currentTime);
 
-        TweetRequest tweetRequest = new TweetRequest(tweet, AUTH_TOKEN_KEY);
+        String authToken = getAuthToken();
+        TweetRequest tweetRequest = new TweetRequest(tweet, authToken);
+        tweetRequest.setAuthToken(authToken);
 
         TweetTask tweetTask = new TweetTask(tweetPresenter, this);
         tweetTask.execute(tweetRequest);

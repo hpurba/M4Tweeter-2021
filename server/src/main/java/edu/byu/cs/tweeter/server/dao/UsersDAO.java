@@ -72,16 +72,19 @@ public class UsersDAO {
         }
 
         String alias = item.getString(UsernameAttribute);
-        String first_name = item.getString(FirstNameAttribute);
-        String last_name = item.getString(LastNameAttribute);
-        String image_url = item.getString(ProfileImageURLAttribute);
+        String firstName = item.getString(FirstNameAttribute);
+        String lastName = item.getString(LastNameAttribute);
+        String profileImageURL = item.getString(ProfileImageURLAttribute);
         String password = item.getString(PasswordAttribute);
 
         if (!password.equals(request.getPassword())) {
             return new LoginResponse("Password is invalid");
         }
 
-        return new LoginResponse(new User(first_name, last_name, alias, image_url), "token");
+//        LoginResponse loginResponse = new LoginResponse(new User(firstName, lastName, alias, profileImageURL), "token");
+//        loginResponse.setSuccess(true);
+//        return loginResponse;
+        return new LoginResponse(new User(firstName, lastName, alias, profileImageURL), "tempAuthTokenInUsersDAO");
     }
 
 

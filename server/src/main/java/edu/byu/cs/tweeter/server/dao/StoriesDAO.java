@@ -107,6 +107,11 @@ public class StoriesDAO {
             hasMore = true;
         }
 
+        if(tweets == null && lastKey == null) {
+            hasMore = false;
+            return new StoryTweetsResponse("No Tweets");
+        }
+
         return new StoryTweetsResponse(tweets, hasMore);
     }
 

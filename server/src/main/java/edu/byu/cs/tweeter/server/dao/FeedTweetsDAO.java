@@ -41,7 +41,7 @@ public class FeedTweetsDAO {
         attrNames.put("#AliasHandle", HandleAttribute);
 
         Map<String, AttributeValue> attrValues = new HashMap<>();
-        attrValues.put(":alias", new AttributeValue().withS(request.getTweet().getAlias()));
+        attrValues.put(":alias", new AttributeValue().withS(request.getUser().getAlias()));
 
         QueryRequest queryRequest = new QueryRequest()
                 .withTableName(TableName)
@@ -52,7 +52,7 @@ public class FeedTweetsDAO {
 
         if (request.getLastTweet() != null) {
             Map<String, AttributeValue> startKey = new HashMap<>();
-            startKey.put(HandleAttribute, new AttributeValue().withS(request.getTweet().getAlias()));
+            startKey.put(HandleAttribute, new AttributeValue().withS(request.getUser().getAlias()));
             startKey.put(TimestampAttribute, new AttributeValue().withN(String.valueOf(request.getLastTweet().getTimestamp())));
 
             queryRequest = queryRequest.withExclusiveStartKey(startKey);
@@ -83,7 +83,7 @@ public class FeedTweetsDAO {
 
         // No items in list
         if(tweets == null && lastKey == null) {
-//            hasMore = false;
+            hasMore = false;
             return new FeedTweetsResponse("No Tweets");
         }
 

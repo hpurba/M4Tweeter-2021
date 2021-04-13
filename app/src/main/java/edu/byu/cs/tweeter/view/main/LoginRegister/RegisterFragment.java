@@ -124,7 +124,7 @@ public class RegisterFragment extends Fragment implements RegisterPresenter.View
         Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
 
         // https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application
-        intent.putExtra(MainActivity.CURRENT_USER_KEY, registerResponse.getUser()); // Original method
+//        intent.putExtra(MainActivity.CURRENT_USER_KEY, registerResponse.getUser()); // Original method
         intent.putExtra("CURRENT_USER_KEY", registerResponse.getUser());
         intent.putExtra("AUTH_TOKEN_KEY", registerResponse.getAuthToken());
 

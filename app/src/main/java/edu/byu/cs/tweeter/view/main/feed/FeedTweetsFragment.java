@@ -32,7 +32,7 @@ import edu.byu.cs.tweeter.view.main.OtherUserProfile.OtherUserProfileActivity;
 public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.View {
 
     private static final String LOG_TAG = "FeedTweetsFragment";
-    private static final String USER_KEY = "UserKey";
+    private static User CURRENT_USER_KEY;
     private static  String AUTH_TOKEN_KEY;
     private static final int LOADING_DATA_VIEW = 0;
     private static final int ITEM_VIEW = 1;
@@ -55,7 +55,10 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
     public static FeedTweetsFragment newInstance(User user, String authToken) {
         FeedTweetsFragment fragment = new FeedTweetsFragment();
         Bundle args = new Bundle(2);
-        args.putSerializable(USER_KEY, user);
+//        this.user = user;
+//        this.authToken = authToken;
+        CURRENT_USER_KEY = user;
+//        args.putSerializable(CURRENT_USER_KEY, user);
 //        args.putSerializable(AUTH_TOKEN_KEY, authToken);
         AUTH_TOKEN_KEY = authToken;
         fragment.setArguments(args);
@@ -67,7 +70,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
         View view = inflater.inflate(R.layout.fragment_feedtweets, container, false);
 
         //noinspection ConstantConditions
-        user = (User) getArguments().getSerializable(USER_KEY);
+//        user = (User) getArguments().getSerializable(CURRENT_USER_KEY);
 //        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
 
 
@@ -87,8 +90,8 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
     }
 
     @Override
-    public Tweet getTweet() {
-        return tweet;
+    public User getUser() {
+        return CURRENT_USER_KEY;
     }
 
     @Override
@@ -302,14 +305,20 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
          */
         @Override
         public void feedTweetsRetrieved(FeedTweetsResponse feedTweetsResponse) {
-            List<Tweet> tweets = feedTweetsResponse.getTweets();
+            if(feedTweetsResponse != null && feedTweetsResponse.getTweets().size() != 0) {
+                List<Tweet> tweets = feedTweetsResponse.getTweets();
 
-            lastTweet = (tweets.size() > 0) ? tweets.get(tweets.size() -1) : null;
-            hasMorePages = feedTweetsResponse.getHasMorePages();
+                lastTweet = (tweets.size() > 0) ? tweets.get(tweets.size() -1) : null;
+                hasMorePages = feedTweetsResponse.getHasMorePages();
 
-            isLoading = false;
-            removeLoadingFooter();
-            feedTweetsRecyclerViewAdapter.addItems(tweets);
+                isLoading = false;
+                removeLoadingFooter();
+                feedTweetsRecyclerViewAdapter.addItems(tweets);
+            }
+            else {
+                isLoading = false;
+                removeLoadingFooter();
+            }
         }
 
         /**

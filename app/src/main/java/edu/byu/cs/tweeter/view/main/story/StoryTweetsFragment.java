@@ -125,6 +125,7 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
          * @param tweet the tweet.
          */
         void bindTweet(Tweet tweet) {
+
             userAlias.setText(tweet.getAlias());
             tweetText.setText(tweet.getTweetText());
         }
@@ -263,14 +264,20 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
          */
         @Override
         public void storyTweetsRetrieved(StoryTweetsResponse storyTweetsResponse) {
-            List<Tweet> tweets = storyTweetsResponse.getTweets();
+            if (storyTweetsResponse != null && storyTweetsResponse.getTweets().size() != 0) {
+                List<Tweet> tweets = storyTweetsResponse.getTweets();
 
-            lastTweet = (tweets.size() > 0) ? tweets.get(tweets.size() -1) : null;
-            hasMorePages = storyTweetsResponse.getHasMorePages();
+                lastTweet = (tweets.size() > 0) ? tweets.get(tweets.size() -1) : null;
+                hasMorePages = storyTweetsResponse.getHasMorePages();
 
-            isLoading = false;
-            removeLoadingFooter();
-            storyTweetsRecyclerViewAdapter.addItems(tweets);
+                isLoading = false;
+                removeLoadingFooter();
+                storyTweetsRecyclerViewAdapter.addItems(tweets);
+            }
+            else {
+                isLoading = false;
+                removeLoadingFooter();
+            }
         }
 
         /**
