@@ -1,33 +1,43 @@
 package edu.byu.cs.tweeter.model.service.request;
 
+import edu.byu.cs.tweeter.model.domain.Tweet;
+
 public class TweetRequest {
 
-    private String username;
-    private String tweetText;
+    private Tweet tweet;
+    private String authToken;
 
     /**
      * Empty Default constructor
      */
     public TweetRequest() { }
 
-    public TweetRequest(String username, String tweetText) {
-        this.username = username;
-        this.tweetText = tweetText;
+    public TweetRequest(Tweet tweet, String tweetText) {
+        this.tweet = tweet;
+        this.authToken = authToken;
     }
 
     public String getUsername() {
-        return username;
+        return tweet.getAlias();
     }
 
     public String getTweetText() {
-        return tweetText;
+        return tweet.getTweetText();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getAuthToken() {
+        return authToken;
     }
 
-    public void setTweetText(String tweetText) {
-        this.tweetText = tweetText;
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
+    public Tweet getTweet() {
+        return tweet;
+    }
+
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
     }
 }

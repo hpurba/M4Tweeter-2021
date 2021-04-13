@@ -285,7 +285,8 @@ public class StoryTweetsFragment  extends Fragment implements StoryTweetsPresent
          * loading footer view) at the bottom of the list.
          */
         private void addLoadingFooter() {
-            addItem(new Tweet("@TestUser", "I'm the test user!", "Test User"));
+            User tempUser = new User("FirstName", "LastName", "@DummyUser", "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
+            addItem(new Tweet(tempUser, "Tweet Text Goes Here", 0));
         }
 
         /**

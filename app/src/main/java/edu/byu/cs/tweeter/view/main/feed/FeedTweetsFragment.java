@@ -137,7 +137,8 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
                         intent.putExtra(OtherUserProfileActivity.CURRENT_USER_KEY, user);
                         intent.putExtra(OtherUserProfileActivity.AUTH_TOKEN_KEY, authToken);
                         intent.putExtra(OtherUserProfileActivity.OTHER_USER_ALIAS, userAlias.getText().toString());
-                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, userName.getText().toString());
+//                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, userName.getText().toString());
+                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, user.getFirstName() +  " " + user.getLastName());
 
                         context.startActivity(intent);
                     }
@@ -154,9 +155,11 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
          * @param tweet the tweet.
          */
         void bindTweet(Tweet tweet) {
-            userAlias.setText(tweet.getAlias());
-            tweetText.setText(tweet.getTweetText());
-            userName.setText(tweet.getUserName());
+            if(tweet != null) {
+                userAlias.setText(tweet.getAlias());
+                tweetText.setText(tweet.getTweetText());
+            }
+//            userName.setText(tweet.getUserName());
         }
     }
 
@@ -319,7 +322,8 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
          * loading footer view) at the bottom of the list.
          */
         private void addLoadingFooter() {
-            addItem(new Tweet("@DummyUser", "I'm a dummy", "Dummy User"));
+            User tempUser = new User("FirstName", "LastName", "@DummyUser", "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
+            addItem(new Tweet(tempUser, "Tweet Text Goes Here", 0));
         }
 
         /**

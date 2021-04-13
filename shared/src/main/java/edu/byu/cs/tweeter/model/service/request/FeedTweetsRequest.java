@@ -7,6 +7,7 @@ public class FeedTweetsRequest {
     private Tweet tweet;
     private int limit;
     private Tweet lastTweet;
+    private String authToken;
 
     /**
      * Empty Default constructor
@@ -66,5 +67,13 @@ public class FeedTweetsRequest {
 
     public void setLastTweet(Tweet lastTweet) {
         this.lastTweet = lastTweet;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

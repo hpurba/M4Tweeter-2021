@@ -38,9 +38,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
 
 import edu.byu.cs.tweeter.R;
 import edu.byu.cs.tweeter.model.domain.AuthToken;
+import edu.byu.cs.tweeter.model.domain.Tweet;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.LogoutRequest;
 import edu.byu.cs.tweeter.model.service.request.TweetRequest;
@@ -105,8 +107,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         }
 //        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
 
-        String authToken = "MadeUpAuthTokenInMainActivity";
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), user, authToken);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), user, AUTH_TOKEN_KEY);
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -141,83 +142,12 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         TextView userAlias = findViewById(R.id.userAlias);
         userAlias.setText(user.getAlias());
 
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // ORIGINAL
-//         Set the user profile Image using image bytes
+        // Sets the logged in user's profile Image
         ImageView userImageView = findViewById(R.id.userImageMain);
         byte [] imageBytes = user.getImageBytes();    // old method
         if (imageBytes != null) {
             setImageViewWithByteArray(userImageView, imageBytes);
         }
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//        ImageView userImageView = findViewById(R.id.userImageMain);
-//        byte [] imageBytes = new byte[0];    // old method
-//        try {
-////            imageBytes = ByteArrayUtils.bytesFromUrl("https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
-////            imageBytes = fetchRemoteFile("https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        setImageViewWithByteArray(userImageView, imageBytes);
-
-//        byte[] imageBytes = new byte[0];
-//        try {
-//            imageBytes = fetchRemoteFile("https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40hpurba.png");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        try {
-////            imageBytes = ByteArrayUtils.bytesFromUrl(user.getImageUrl());
-////            imageBytes = ByteArrayUtils.bytesFromUrl("https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40hpurba.png");
-//
-//            String urlStr = "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40hpurba.png";
-//            URL url = new URL(urlStr);
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            InputStream is = null;
-//            try {
-//                is = url.openStream();
-//                byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
-//                int n;
-//
-//                while ( (n = is.read(byteChunk)) > 0 ) {
-//                    baos.write(byteChunk, 0, n);
-//                }
-//            }
-//            catch (IOException e) {
-//                System.err.printf ("Failed while reading bytes from %s: %s", url.toExternalForm(), e.getMessage());
-//                e.printStackTrace ();
-//                // Perform any other exception handling that's appropriate.
-//            }
-//            finally {
-//                if (is != null) { is.close(); }
-//            }
-//            imageBytes = baos.toByteArray();
-//
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-
-//        try {
-//            setImageViewWithByteArray(userImageView, fetchRemoteFile(user.getImageUrl()));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Display the Followee Count
         TextView followeeCount = findViewById(R.id.followeeCount);
@@ -389,7 +319,10 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         tweetCompleteToast = Toast.makeText(this, output, Toast.LENGTH_LONG);
         tweetCompleteToast.show();
 
-        TweetRequest tweetRequest = new TweetRequest(user.getAlias(), tweetText);
+        long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
+        Tweet tweet = new Tweet(user, tweetText, currentTime);
+
+        TweetRequest tweetRequest = new TweetRequest(tweet, AUTH_TOKEN_KEY);
 
         TweetTask tweetTask = new TweetTask(tweetPresenter, this);
         tweetTask.execute(tweetRequest);

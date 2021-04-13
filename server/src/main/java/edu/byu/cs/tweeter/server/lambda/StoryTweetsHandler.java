@@ -10,6 +10,12 @@ import edu.byu.cs.tweeter.server.service.StoryTweetsServiceImpl;
 public class StoryTweetsHandler implements RequestHandler<StoryTweetsRequest, StoryTweetsResponse> {
     @Override
     public StoryTweetsResponse handleRequest(StoryTweetsRequest request, Context context) {
+        if (request == null) {
+            throw new RuntimeException("[BadRequest400] 400 : request is null");
+        } else if (request.getLimit() < 0) {
+            throw new RuntimeException("[BadRequest400] 400");
+        }
+
         StoryTweetsServiceImpl service = new StoryTweetsServiceImpl();
         return service.getStoryTweets(request);
     }

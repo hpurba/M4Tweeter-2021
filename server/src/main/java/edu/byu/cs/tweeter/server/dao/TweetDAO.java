@@ -1,3 +1,5 @@
+// TODO: DISCARD
+
 package edu.byu.cs.tweeter.server.dao;
 
 import edu.byu.cs.tweeter.model.domain.User;
@@ -15,7 +17,7 @@ public class TweetDAO {
         User user = new User("Test", "User",
                 "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
         user.setAlias("@TestUser");
-        tweetResponse = new TweetResponse(user);
+        tweetResponse = new TweetResponse(true, user.getAlias());
 
         return tweetResponse;
     }

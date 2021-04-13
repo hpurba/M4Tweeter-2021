@@ -1,3 +1,5 @@
+// TODO: KEEP
+
 package edu.byu.cs.tweeter.server.dao;
 
 import com.amazonaws.services.dynamodbv2.document.*;
@@ -18,6 +20,11 @@ public class AuthorizationsDAO {
             .build();
     private static DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
 
+    /**
+     * Adds a token with a timestamp to the authorizations Table.
+     * @param token
+     * @param timestamp
+     */
     public void addToken(String token, String timestamp) {
         Table table = dynamoDB.getTable(TableName);
 
@@ -33,14 +40,20 @@ public class AuthorizationsDAO {
     }
 
 
-    public String validateToken(String token) {
+    /**
+     * Tries to find a token in the authorizations Table.
+     * @param token
+     * @return
+     */
+    public long validateToken(String token) {
         Table table = dynamoDB.getTable(TableName);
 
-        Item item = table.getItem(TokenAttr, token);
-        if (item == null) {
-            return null;
+        Item authorizationItem = table.getItem(TokenAttr, token);
+        // Item not found
+        if (authorizationItem == null) {
+            return -1;
         }
 
-        return item.getString(TimestampAttr);
+        return Long.parseLong(authorizationItem.getString(TimestampAttr));
     }
 }

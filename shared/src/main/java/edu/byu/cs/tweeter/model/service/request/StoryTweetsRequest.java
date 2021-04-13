@@ -7,6 +7,7 @@ public class StoryTweetsRequest {
     private Tweet tweet;
     private int limit;
     private Tweet lastTweet;
+    private String authToken;
 
 
     public StoryTweetsRequest() {}
@@ -65,5 +66,13 @@ public class StoryTweetsRequest {
 
     public void setLastTweet(Tweet lastTweet) {
         this.lastTweet = lastTweet;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

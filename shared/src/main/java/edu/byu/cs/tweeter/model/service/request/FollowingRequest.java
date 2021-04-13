@@ -11,8 +11,7 @@ public class FollowingRequest {
     private User follower;
     private int limit;
     private User lastFollowee;
-
-
+    private String authToken;
 
     /**
      * Creates an instance.
@@ -70,5 +69,13 @@ public class FollowingRequest {
 
     public void setLastFollowee(User lastFollowee) {
         this.lastFollowee = lastFollowee;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

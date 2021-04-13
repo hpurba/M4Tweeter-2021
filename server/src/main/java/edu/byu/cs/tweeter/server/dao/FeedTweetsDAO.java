@@ -1,3 +1,5 @@
+// TODO: DISCARD
+
 package edu.byu.cs.tweeter.server.dao;
 
 import java.util.ArrayList;
@@ -5,32 +7,33 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.byu.cs.tweeter.model.domain.Tweet;
+import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.FeedTweetsRequest;
 import edu.byu.cs.tweeter.model.service.response.FeedTweetsResponse;
 
 public class FeedTweetsDAO {
 
     // Collection of Tweet(s). [tweet1 - tweet20]
-    private final Tweet tweet1 = new Tweet("@AllenAnderson", "I am Allen! Nice to meet you all!", "Allen Anderson");
-    private final Tweet tweet2 = new Tweet("@AmyAmes", "Yooo I'm Amy.", "Amy Ames");
-    private final Tweet tweet3 = new Tweet("@BobBobson", "Welcome to Bob paradise", "Bob Bobson");
-    private final Tweet tweet4 = new Tweet("@BonnieBeatty", "I don't have anything to say", "Bonnie Beatty");
-    private final Tweet tweet5 = new Tweet("@ChrisColston", "Motorycles are cool", "Chris Colston");
-    private final Tweet tweet6 = new Tweet("@CindyCoats", "I love physics", "Cindy Coats");
-    private final Tweet tweet7 = new Tweet("@DanDonaldson", "Do I look like a duck to you?", "Dan Donaldson");
-    private final Tweet tweet8 = new Tweet("@DeeDempsey", "Doooo doooooooo doodly dooo", "Dee Dempsey");
-    private final Tweet tweet9 = new Tweet("@ElliottEnderson", "heyoooooo", "Elliott Enderson");
-    private final Tweet tweet10 = new Tweet("@ElizabethEngle", "bah blah", "Elizabeth Engle");
-    private final Tweet tweet11 = new Tweet("@FrankFrandson", "frank is dope bro", "Frank Frandson");
-    private final Tweet tweet12 = new Tweet("@FranFranklin", "i am rich", "Fran Franklin");
-    private final Tweet tweet13 = new Tweet("@GaryGilbert", "i am poor", "Gary Gilbert");
-    private final Tweet tweet14 = new Tweet("@GiovannaGiles", "i have a good life", "Giovanna Giles");
-    private final Tweet tweet15 = new Tweet("@HenryHenderson", "one republic yo", "Henry Henderson");
-    private final Tweet tweet16 = new Tweet("@HelenHopwell", "Have hope for the future", "Helen Hopwell");
-    private final Tweet tweet17 = new Tweet("@IgorIsaacson", "You should give this guy 100% because hes a good person", "Igor Isaacson");
-    private final Tweet tweet18 = new Tweet("@IsabelIsaacson", "I like to eat pizza", "Isabel Isaacson");
-    private final Tweet tweet19 = new Tweet("@JustinJones", "world peace is not possible", "Justin Jones");
-    private final Tweet tweet20 = new Tweet("@JillJohnson", "I am an olympian", "JillJohnson");
+//    private final Tweet tweet1 = new Tweet(new User("@AllenAnderson"), "I am Allen! Nice to meet you all!", 1231231);
+//    private final Tweet tweet2 = new Tweet("@AmyAmes", "Yooo I'm Amy.", 1231231);
+//    private final Tweet tweet3 = new Tweet("@BobBobson", "Welcome to Bob paradise", 123121);
+//    private final Tweet tweet4 = new Tweet("@BonnieBeatty", "I don't have anything to say", 1231231);
+//    private final Tweet tweet5 = new Tweet("@ChrisColston", "Motorycles are cool", 1231232);
+//    private final Tweet tweet6 = new Tweet("@CindyCoats", "I love physics", "Cindy Coats");
+//    private final Tweet tweet7 = new Tweet("@DanDonaldson", "Do I look like a duck to you?", "Dan Donaldson");
+//    private final Tweet tweet8 = new Tweet("@DeeDempsey", "Doooo doooooooo doodly dooo", "Dee Dempsey");
+//    private final Tweet tweet9 = new Tweet("@ElliottEnderson", "heyoooooo", "Elliott Enderson");
+//    private final Tweet tweet10 = new Tweet("@ElizabethEngle", "bah blah", "Elizabeth Engle");
+//    private final Tweet tweet11 = new Tweet("@FrankFrandson", "frank is dope bro", "Frank Frandson");
+//    private final Tweet tweet12 = new Tweet("@FranFranklin", "i am rich", "Fran Franklin");
+//    private final Tweet tweet13 = new Tweet("@GaryGilbert", "i am poor", "Gary Gilbert");
+//    private final Tweet tweet14 = new Tweet("@GiovannaGiles", "i have a good life", "Giovanna Giles");
+//    private final Tweet tweet15 = new Tweet("@HenryHenderson", "one republic yo", "Henry Henderson");
+//    private final Tweet tweet16 = new Tweet("@HelenHopwell", "Have hope for the future", "Helen Hopwell");
+//    private final Tweet tweet17 = new Tweet("@IgorIsaacson", "You should give this guy 100% because hes a good person", "Igor Isaacson");
+//    private final Tweet tweet18 = new Tweet("@IsabelIsaacson", "I like to eat pizza", "Isabel Isaacson");
+//    private final Tweet tweet19 = new Tweet("@JustinJones", "world peace is not possible", "Justin Jones");
+//    private final Tweet tweet20 = new Tweet("@JillJohnson", "I am an olympian", "JillJohnson");
 
     public FeedTweetsResponse getFeedTweets(FeedTweetsRequest request) {
 
@@ -68,8 +71,9 @@ public class FeedTweetsDAO {
      * @return the generator.
      */
     List<Tweet> getDummyTweets() {
-        return Arrays.asList(tweet1, tweet2, tweet3, tweet4, tweet5, tweet6, tweet7, tweet8, tweet9, tweet10, tweet11, tweet12,
-                tweet13, tweet14, tweet15, tweet16, tweet17, tweet18, tweet19, tweet20);
+        return Arrays.asList(); // tweet1, tweet2, tweet3, tweet4, tweet5);
+        // , tweet6, tweet7, tweet8, tweet9, tweet10, tweet11, tweet12,
+           //      tweet13, tweet14, tweet15, tweet16, tweet17, tweet18, tweet19, tweet20);
     }
 
     /**

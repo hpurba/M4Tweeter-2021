@@ -3,6 +3,7 @@ package edu.byu.cs.tweeter.model.service.request;
 public class LogoutRequest {
 
     private String username;
+    private String authToken;
 
     /**
      * Empty Default constructor
@@ -29,5 +30,13 @@ public class LogoutRequest {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

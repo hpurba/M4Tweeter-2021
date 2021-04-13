@@ -8,6 +8,7 @@ public class FollowingStatusRequest {
     private String myUsername;
     private String otherPersonUsername;
     private Boolean isFollowing;
+    private String authToken;
 
     /**
      * Empty Default constructor
@@ -53,5 +54,13 @@ public class FollowingStatusRequest {
 
     public void setFollowing(Boolean following) {
         isFollowing = following;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }

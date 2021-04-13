@@ -5,27 +5,40 @@ import java.util.Objects;
 
 public class Tweet implements Comparable<Tweet>, Serializable {
 
-    private final String alias;
+    private User user;
+//    private final String alias;
     private final String tweetText;
-    private final String userName;
-
-    public String getUserName() {
-        return userName;
-    }
+    private long timestamp;
 
     // Constructor
-    public Tweet(String alias, String tweetText, String userName) {
-        this.alias = alias;
+    public Tweet(User user, String tweetText, long timestamp) {
+        this.user = user;
         this.tweetText = tweetText;
-        this.userName = userName;
+        this.timestamp = timestamp;
     }
 
     public String getAlias() {
-        return alias;
+        return user.getAlias();
     }
 
     public String getTweetText() {
         return tweetText;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -33,12 +46,12 @@ public class Tweet implements Comparable<Tweet>, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tweet tweetComp = (Tweet) o;
-        return alias.equals(tweetComp.alias) && tweetText.equals(tweetComp.tweetText);
+        return user.getAlias().equals(tweetComp.getAlias()) && tweetText.equals(tweetComp.tweetText);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(alias);
+        return Objects.hash(user.getAlias());
     }
 
     @Override

@@ -11,6 +11,12 @@ public class TweetHandler implements RequestHandler<TweetRequest, TweetResponse>
 
     @Override
     public TweetResponse handleRequest(TweetRequest tweetRequest, Context context) {
+        if (tweetRequest == null) {
+            throw new RuntimeException("[BadRequest400] 400 : tweet request is null");
+        } else if (tweetRequest.getTweet() == null || tweetRequest.getAuthToken() == null) {
+            throw new RuntimeException("[BadRequest500] 500 : Missing tweet or authToken");
+        }
+
         TweetServiceImpl tweetService = new TweetServiceImpl();
         return tweetService.tweet(tweetRequest);
     }
