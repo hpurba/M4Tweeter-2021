@@ -41,7 +41,7 @@ public class RegisterHandler implements RequestHandler<RegisterRequest, Register
             return registerService.register(registerRequest);
         } catch (Exception e) {
 //            System.out.println(e.toString());
-            throw new RuntimeException("[BadRequest500] 500");
+            throw new RuntimeException("[BadRequest500] 500 : " + e.toString());
         }
     }
 }

@@ -11,40 +11,52 @@ import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
 public class UsersDAO {
     // Table Name and attributes (columns)
     private static final String TableName = "users";
-    private static final String UsernameAttribute = "alias";    // partition/sort key.
+    private static final String UsernameAttribute = "alias";    // This is the partition/sort key.
     private static final String FirstNameAttribute = "first_name";
     private static final String LastNameAttribute = "last_name";
     private static final String ProfileImageURLAttribute = "image_url";
     private static final String PasswordAttribute = "password";
 
-    // DynamoDB client
+    // AWS DynamoDB Client
     private static AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder
             .standard()
             .withRegion("us-west-2")
             .build();
     private static DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
 
+    /**
+     * Registering User.
+     * Creates a new User Item to add to add to the DynamoDB table.
+     * @param request
+     * @return
+     */
     public RegisterResponse register(RegisterRequest request) {
         Table table = dynamoDB.getTable(TableName);
 
-        Item check = table.getItem(UsernameAttribute, request.getAlias());
-        if (check != null) {
+        Item foundItem = table.getItem(UsernameAttribute, request.getAlias());
+        if (foundItem != null) {
             return new RegisterResponse("User already exists, try logging in.");
         }
 
-        Item item = new Item()
+        Item newUser = new Item()
                 .withPrimaryKey(UsernameAttribute, request.getAlias())
                 .withString(FirstNameAttribute, request.getFirstName())
                 .withString(LastNameAttribute, request.getLastName())
                 .withString(ProfileImageURLAttribute, request.getProfileImageURL())
                 .withString(PasswordAttribute, request.getPassword());
-        table.putItem(item);
+        table.putItem(newUser);
 
-        User user = new User(request.getFirstName(), request.getLastName(), request.getAlias(), request.getImageURL());
+        User user = new User(request.getFirstName(), request.getLastName(), request.getAlias(), request.getProfileImageURL());
 
+        // authtoken will be changed in the RegisterServiceImpl and added to the authorizations table using the AuthorizationsDAO
         return new RegisterResponse(user, "token");
     }
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     public RegisterResponse login(RegisterRequest request) {
         Table table = dynamoDB.getTable(TableName);
 
