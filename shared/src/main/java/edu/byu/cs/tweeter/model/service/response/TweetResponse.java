@@ -10,8 +10,8 @@ public class TweetResponse extends Response {
         super(false, message);
     }
 
-    public TweetResponse(Boolean success, String username) {
-        super(success, "Nice Tweet! " + username + "!");
+    public TweetResponse(Boolean success) {
+        super(success);
     }
 
 //    public TweetResponse(User user) {

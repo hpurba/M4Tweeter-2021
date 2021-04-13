@@ -17,7 +17,7 @@ public class TweetDAO {
         User user = new User("Test", "User",
                 "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
         user.setAlias("@TestUser");
-        tweetResponse = new TweetResponse(true, user.getAlias());
+        tweetResponse = new TweetResponse(true);
 
         return tweetResponse;
     }

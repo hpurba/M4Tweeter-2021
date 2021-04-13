@@ -21,3 +21,26 @@ public class TweetHandler implements RequestHandler<TweetRequest, TweetResponse>
         return tweetService.tweet(tweetRequest);
     }
 }
+
+
+
+// This can be used as a test
+/*
+{
+    "tweet": {
+        "user" : {
+            "firstName": "hikaru",
+            "lastName": "purba",
+            "alias": "hpurba",
+            "imageUrl" : "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/@hpurba.png",
+            "byteArray": null,
+            "followersCount": "0",
+            "followingCount": "0"
+        },
+        "tweetText": "The User's tweet as text",
+        "timestamp": "123"
+    },
+    "authToken": "91ea3688-ee0e-447d-b229-31eee9f5dde7"
+}
+
+ */

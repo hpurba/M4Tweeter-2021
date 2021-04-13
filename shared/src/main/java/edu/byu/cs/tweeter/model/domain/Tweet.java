@@ -7,8 +7,10 @@ public class Tweet implements Comparable<Tweet>, Serializable {
 
     private User user;
 //    private final String alias;
-    private final String tweetText;
+    private String tweetText;
     private long timestamp;
+
+    public Tweet() {}
 
     // Constructor
     public Tweet(User user, String tweetText, long timestamp) {
@@ -39,6 +41,10 @@ public class Tweet implements Comparable<Tweet>, Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setTweetText(String tweetText) {
+        this.tweetText = tweetText;
     }
 
     @Override

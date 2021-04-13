@@ -54,7 +54,7 @@ public class StoriesDAO {
                 .withString(ProfileImageURLAttribute, request.getTweet().getUser().getImageUrl());
         table.putItem(item);
 
-        return new TweetResponse(true, request.getUsername());
+        return new TweetResponse(true);
     }
 
     /**
