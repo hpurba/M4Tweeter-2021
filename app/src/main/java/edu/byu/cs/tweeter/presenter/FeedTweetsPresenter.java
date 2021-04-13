@@ -22,6 +22,7 @@ public class FeedTweetsPresenter {
         Tweet getTweet();
         int getPageSize();
         Tweet getLastTweet();
+        String getAuthToken();
     }
 
     /**
@@ -38,7 +39,7 @@ public class FeedTweetsPresenter {
      * @throws IOException
      */
     public FeedTweetsResponse getFeedTweets() throws IOException {
-        FeedTweetsRequest request = new FeedTweetsRequest(view.getTweet(), view.getPageSize(), view.getLastTweet());
+        FeedTweetsRequest request = new FeedTweetsRequest(view.getTweet(), view.getPageSize(), view.getLastTweet(), view.getAuthToken());
         FeedTweetsService feedTweetsService = getFeedTweetsService();
         return feedTweetsService.getFeedTweets(request);
     }

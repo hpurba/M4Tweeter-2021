@@ -23,10 +23,11 @@ public class FeedTweetsRequest {
      *                     there was no previous request or if no followers were returned in the
      *                     previous request).
      */
-    public FeedTweetsRequest(Tweet tweet, int limit, Tweet lastTweet) {
+    public FeedTweetsRequest(Tweet tweet, int limit, Tweet lastTweet, String authToken) {
         this.tweet = tweet;
         this.limit = limit;
         this.lastTweet = lastTweet;
+        this.authToken = authToken;
     }
 
     /**

@@ -14,12 +14,12 @@ import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
 
 public class UsersDAO {
     // Table Name and attributes (columns)
-    private static final String TableName = "users";
-    private static final String UsernameAttribute = "alias";    // This is the partition/sort key.
-    private static final String FirstNameAttribute = "first_name";
-    private static final String LastNameAttribute = "last_name";
-    private static final String ProfileImageURLAttribute = "image_url";
-    private static final String PasswordAttribute = "password";
+    private static final String TableName = "Users";
+    private static final String UsernameAttribute = "Alias";    // This is the partition/sort key.
+    private static final String FirstNameAttribute = "FirstName";
+    private static final String LastNameAttribute = "LastName";
+    private static final String ProfileImageURLAttribute = "ProfileImageURL";
+    private static final String PasswordAttribute = "Password";
 
     // AWS DynamoDB Client
     private static AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder

@@ -12,7 +12,6 @@ public class StoryTweetsRequest {
 
     public StoryTweetsRequest() {}
 
-
     /**
      * Creates an instance.
      *
@@ -22,10 +21,11 @@ public class StoryTweetsRequest {
      *                     there was no previous request or if no followers were returned in the
      *                     previous request).
      */
-    public StoryTweetsRequest(Tweet tweet, int limit, Tweet lastTweet) {
+    public StoryTweetsRequest(Tweet tweet, int limit, Tweet lastTweet, String authToken) {
         this.tweet = tweet;
         this.limit = limit;
         this.lastTweet = lastTweet;
+        this.authToken = authToken;
     }
 
     /**

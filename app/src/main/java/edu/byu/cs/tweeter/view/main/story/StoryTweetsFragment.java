@@ -27,7 +27,7 @@ import edu.byu.cs.tweeter.model.service.response.StoryTweetsResponse;
 import edu.byu.cs.tweeter.presenter.StoryTweetsPresenter;
 import edu.byu.cs.tweeter.view.asyncTasks.GetStoryTweetsTask;
 
-public class StoryTweetsFragment  extends Fragment implements StoryTweetsPresenter.View {
+public class StoryTweetsFragment extends Fragment implements StoryTweetsPresenter.View {
 
     private static final String LOG_TAG = "StoryTweetsFragment";
     private static final String USER_KEY = "UserKey";
@@ -83,6 +83,11 @@ public class StoryTweetsFragment  extends Fragment implements StoryTweetsPresent
         storyTweetsRecyclerView.addOnScrollListener(new StoryTweetsFragment.StoryTweetsRecyclerViewPaginationScrollListener(layoutManager));
 
         return view;
+    }
+
+    @Override
+    public String getAuthToken() {
+        return AUTH_TOKEN_KEY;
     }
 
     /**
@@ -246,7 +251,7 @@ public class StoryTweetsFragment  extends Fragment implements StoryTweetsPresent
             addLoadingFooter();
 
             GetStoryTweetsTask getStoryTweetsTask = new GetStoryTweetsTask(presenter, this);
-            StoryTweetsRequest request = new StoryTweetsRequest(tweet, PAGE_SIZE, lastTweet);
+            StoryTweetsRequest request = new StoryTweetsRequest(tweet, PAGE_SIZE, lastTweet, AUTH_TOKEN_KEY);
             getStoryTweetsTask.execute(request);
         }
 

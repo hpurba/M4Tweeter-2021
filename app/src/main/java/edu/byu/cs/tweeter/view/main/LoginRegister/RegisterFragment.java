@@ -34,7 +34,6 @@ public class RegisterFragment extends Fragment implements RegisterPresenter.View
     private Toast registerInToast;
     private Toast uploadImageToast = null;
 
-
     // Photo stuff
     public byte[] byteArray;
     private Bitmap photo;
@@ -124,8 +123,10 @@ public class RegisterFragment extends Fragment implements RegisterPresenter.View
     public void registerSuccessful(RegisterResponse registerResponse) {
         Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
 
-        intent.putExtra(MainActivity.CURRENT_USER_KEY, registerResponse.getUser());
-        intent.putExtra(MainActivity.AUTH_TOKEN_KEY, registerResponse.getAuthToken());
+        // https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application
+        intent.putExtra(MainActivity.CURRENT_USER_KEY, registerResponse.getUser()); // Original method
+        intent.putExtra("CURRENT_USER_KEY", registerResponse.getUser());
+        intent.putExtra("AUTH_TOKEN_KEY", registerResponse.getAuthToken());
 
         registerInToast.cancel();
 

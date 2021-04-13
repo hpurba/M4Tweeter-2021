@@ -10,6 +10,12 @@ import edu.byu.cs.tweeter.server.service.FeedTweetsServiceImpl;
 public class FeedTweetsHandler implements RequestHandler<FeedTweetsRequest, FeedTweetsResponse> {
     @Override
     public FeedTweetsResponse handleRequest(FeedTweetsRequest feedTweetsRequest, Context context) {
+        if (feedTweetsRequest == null) {
+            throw new RuntimeException("[BadRequest400] 400 : request is null");
+        } else if (feedTweetsRequest.getLimit() < 0) {
+            throw new RuntimeException("[BadRequest500] 500");
+        }
+
         FeedTweetsServiceImpl feedTweetsService = new FeedTweetsServiceImpl();
         return feedTweetsService.getFeedTweets(feedTweetsRequest);
     }

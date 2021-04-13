@@ -88,8 +88,10 @@ public class LoginFragment extends Fragment implements LoginPresenter.View, Logi
 
         Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
 
-        intent.putExtra(MainActivity.CURRENT_USER_KEY, loginResponse.getUser());
-        intent.putExtra(MainActivity.AUTH_TOKEN_KEY, loginResponse.getAuthToken());
+//        intent.putExtra(MainActivity.CURRENT_USER_KEY, loginResponse.getUser());
+//        intent.putExtra(MainActivity.AUTH_TOKEN_KEY, loginResponse.getAuthToken());
+        intent.putExtra("CURRENT_USER_KEY", loginResponse.getUser());
+        intent.putExtra("AUTH_TOKEN_KEY", loginResponse.getAuthToken());
 
         loginInToast.cancel();
         startActivity(intent);

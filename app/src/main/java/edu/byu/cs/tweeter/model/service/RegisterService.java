@@ -56,56 +56,6 @@ public class RegisterService extends BaseService implements IRegisterService {
         this.registerResponse = serverFacade.register(registerRequest, URL_PATH);
         if(registerResponse.isSuccess()) {
             loadImage(registerResponse.getUser());
-            
-//            registerResponse.getUser().getImageUrl();
-//
-//
-//            byte [] bytes = new byte[0];
-//            try {
-//                bytes = fetchRemoteFile(registerResponse.getUser().getImageUrl());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            registerResponse.getUser().setImageBytes(bytes);
-            
         }
     }
-
-//    public static byte[] fetchRemoteFile(String urlString) throws Exception {
-//        URL url = new URL(urlString);
-//        HttpURLConnection connection = null;
-//
-//        try {
-//            connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("GET");
-//
-//            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-//                InputStream inputStream = connection.getInputStream();
-//                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//
-//                return bitmap == null ? null : (new BitmapDrawable(Resources.getSystem(), bitmap)).;
-//            } else {
-//                throw new IOException("Unable to read from url. Response code: " + connection.getResponseCode());
-//            }
-//        } finally {
-//            if(connection != null) {
-//                connection.disconnect();
-//            }
-//        }
-
-//        URL url = new URL(location);
-//        InputStream is = null;
-//        byte[] bytes = null;
-//        try {
-//            is = url.openStream ();
-//            bytes = IOUtils.toByteArray(is);
-//        } catch (IOException e) {
-//            //handle errors
-//        }
-//        finally {
-//            if (is != null) is.close();
-//        }
-//        return bytes;
-//    }
-    
 }

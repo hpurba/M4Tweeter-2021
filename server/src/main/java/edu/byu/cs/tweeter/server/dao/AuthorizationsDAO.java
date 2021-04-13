@@ -7,10 +7,10 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 
 public class AuthorizationsDAO {
-    private static final String TableName = "authorizations";
+    private static final String TableName = "Authorizations";
 
-    private static final String TokenAttr = "token";
-    private static final String TimestampAttr = "creationtime";
+    private static final String TokenAttr = "Token";
+    private static final String TimestampAttr = "CreationTime";
 
 
     // DynamoDB client

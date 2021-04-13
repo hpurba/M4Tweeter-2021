@@ -20,14 +20,14 @@ import edu.byu.cs.tweeter.model.service.response.StoryTweetsResponse;
 import edu.byu.cs.tweeter.model.service.response.TweetResponse;
 
 public class StoriesDAO {
-    private static final String TableName = "stories";
+    private static final String TableName = "Stories";
 
-    private static final String HandleAttribute = "alias";
-    private static final String TweetContentAttribute = "content";
-    private static final String TimestampAttribute = "timestamp";
-    private static final String FirstNameAttribute = "first_name";
-    private static final String LastNameAttribute = "last_name";
-    private static final String ImageURLAttribute = "image_url";
+    private static final String HandleAttribute = "Alias";
+    private static final String TweetContentAttribute = "Content";
+    private static final String TimestampAttribute = "Timestamp";
+    private static final String FirstNameAttribute = "FirstName";
+    private static final String LastNameAttribute = "LastName";
+    private static final String ProfileImageURLAttribute = "ProfileImageURL";
 
     // DynamoDB client
     private static AmazonDynamoDB amazonDynamoDB = AmazonDynamoDBClientBuilder
@@ -51,7 +51,7 @@ public class StoriesDAO {
                 .withString(TweetContentAttribute, request.getTweetText())
                 .withString(FirstNameAttribute, request.getTweet().getUser().getFirstName())
                 .withString(LastNameAttribute, request.getTweet().getUser().getLastName())
-                .withString(ImageURLAttribute, request.getTweet().getUser().getImageUrl());
+                .withString(ProfileImageURLAttribute, request.getTweet().getUser().getImageUrl());
         table.putItem(item);
 
         return new TweetResponse(true, request.getUsername());
@@ -94,7 +94,7 @@ public class StoriesDAO {
                 long timestamp = Long.parseLong(item.get(TimestampAttribute).getN());
                 String first_name = item.get(FirstNameAttribute).getS();
                 String last_name = item.get(LastNameAttribute).getS();
-                String image_url = item.get(ImageURLAttribute).getS();
+                String image_url = item.get(ProfileImageURLAttribute).getS();
 
                 User user = new User(first_name, last_name, alias, image_url);
                 tweets.add(new Tweet(user, content, timestamp));

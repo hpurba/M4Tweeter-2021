@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         tweetPresenter = new TweetPresenter(this);
 
         user = (User) getIntent().getSerializableExtra(CURRENT_USER_KEY);
+
         if(user == null) {
             throw new RuntimeException("User not passed to activity");
         }
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         }
 //        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), user, AUTH_TOKEN_KEY);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), user, getAuthToken());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -156,6 +157,14 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         // Display the Follower Count
         TextView followerCount = findViewById(R.id.followerCount);
         followerCount.setText(getString(R.string.followerCount, followerNumCount));
+    }
+
+    public String getAuthToken() {
+        return getIntent().getStringExtra("AUTH_TOKEN_KEY");
+    }
+
+    public User getUser() {
+        return getIntent().getStringArrayExtra("CURRENT_USER_KEY");
     }
 
     @Override

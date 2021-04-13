@@ -33,7 +33,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
 
     private static final String LOG_TAG = "FeedTweetsFragment";
     private static final String USER_KEY = "UserKey";
-    private static final String AUTH_TOKEN_KEY = "AuthTokenKey";
+    private static  String AUTH_TOKEN_KEY;
     private static final int LOADING_DATA_VIEW = 0;
     private static final int ITEM_VIEW = 1;
     private static final int PAGE_SIZE = 8; // Number of items for each scrolling pagination.
@@ -56,7 +56,8 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
         FeedTweetsFragment fragment = new FeedTweetsFragment();
         Bundle args = new Bundle(2);
         args.putSerializable(USER_KEY, user);
-        args.putSerializable(AUTH_TOKEN_KEY, authToken);
+//        args.putSerializable(AUTH_TOKEN_KEY, authToken);
+        AUTH_TOKEN_KEY = authToken;
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,6 +69,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
         //noinspection ConstantConditions
         user = (User) getArguments().getSerializable(USER_KEY);
 //        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
+
 
         presenter = new FeedTweetsPresenter(this);
 
@@ -97,6 +99,11 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
     @Override
     public Tweet getLastTweet() {
         return feedTweetsRecyclerViewAdapter.lastTweet;
+    }
+
+    @Override
+    public String getAuthToken() {
+        return AUTH_TOKEN_KEY;
     }
 
     /**
