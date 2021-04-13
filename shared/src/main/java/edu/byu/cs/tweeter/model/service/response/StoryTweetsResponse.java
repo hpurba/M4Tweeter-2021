@@ -61,4 +61,7 @@ public class StoryTweetsResponse extends PagedResponse {
         return Objects.hash(tweets);
     }
 
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
+    }
 }

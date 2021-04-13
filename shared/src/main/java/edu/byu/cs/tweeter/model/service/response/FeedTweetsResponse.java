@@ -59,4 +59,8 @@ public class FeedTweetsResponse extends PagedResponse {
     public int hashCode() {
         return Objects.hash(tweets);
     }
+
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
+    }
 }

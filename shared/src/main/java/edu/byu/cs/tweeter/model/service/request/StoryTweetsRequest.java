@@ -55,4 +55,15 @@ public class StoryTweetsRequest {
         return lastTweet;
     }
 
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public void setLastTweet(Tweet lastTweet) {
+        this.lastTweet = lastTweet;
+    }
 }

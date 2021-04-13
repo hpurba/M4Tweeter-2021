@@ -59,4 +59,16 @@ public class FollowingRequest {
     public User getLastFollowee() {
         return lastFollowee;
     }
+
+    public void setFollower(User follower) {
+        this.follower = follower;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public void setLastFollowee(User lastFollowee) {
+        this.lastFollowee = lastFollowee;
+    }
 }

@@ -54,4 +54,7 @@ class Response {
         this.success = success;
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
