@@ -7,6 +7,7 @@ public class RegisterRequest {
     private String alias;
     private String password;
     public String byteArray;
+    public String profileImageURL;
 //    public byte[] byteArray;    // this should be a string.
     // Encode image in Base64 String and decode it on the back end.
 
@@ -71,5 +72,13 @@ public class RegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfileImageURL() {
+        return profileImageURL;
+    }
+
+    public void setProfileImageURL(String profileImageURL) {
+        this.profileImageURL = profileImageURL;
     }
 }

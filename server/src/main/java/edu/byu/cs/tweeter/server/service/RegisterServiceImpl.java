@@ -8,7 +8,7 @@ import edu.byu.cs.tweeter.model.service.IRegisterService;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
 import edu.byu.cs.tweeter.server.dao.AuthorizationsDAO;
-import edu.byu.cs.tweeter.server.dao.RegisterDAO;
+import edu.byu.cs.tweeter.server.dao.UsersDAO;
 
 public class RegisterServiceImpl extends ServiceImpl implements IRegisterService {
 
@@ -17,27 +17,36 @@ public class RegisterServiceImpl extends ServiceImpl implements IRegisterService
     private User registeringUser;
 
     public RegisterResponse register(RegisterRequest request) {
-
         // AuthorizationDAO and UsersDAO
         AuthorizationsDAO authorizationsDAO = new AuthorizationsDAO();
-//        UsersDAO usersDAO = new UsersDAO(); // Do a usersDAO
+        UsersDAO usersDAO = new UsersDAO();
 
 
-//        request.setPassword(hashPassword(request.getPassword()));
+        // Build RegisterRequest
+        try {
+            // Upload Image to S3 and set imageURL to its location.
+            request.setProfileImageURL(uploadImageToS3(request.getAlias(), request.getByteArray()));
+            // Replace password with Hashed Password.
+            request.setPassword(hashPassword(request.getPassword()));
+        } catch ( Exception exception) {
+            throw new RuntimeException("[BadRequest500] 500 : Could not process image or generate hashed password.");
+        }
+
+
+
 
         registeringUser = new User(request.getFirstName(), request.getLastName(), MALE_IMAGE_URL);
-
-        String authToken = UUID.randomUUID().toString();
-
-        RegisterResponse registerResponse = new RegisterResponse(registeringUser, authToken);
+//        RegisterResponse registerResponse = new RegisterResponse(registeringUser, authToken);
+        RegisterResponse registerResponse = usersDAO.register(request);
         registerResponse.setSuccess(true);
 
-//        String token = authToken.toString();
+
+
+        // Generate AuthToken
+        String authToken = UUID.randomUUID().toString();
         long curr_time = new Timestamp(System.currentTimeMillis()).getTime();
         authorizationsDAO.addToken(authToken, String.valueOf(curr_time));
 
         return registerResponse;
     }
-
-    RegisterDAO registerDAO() { return new RegisterDAO(); }
 }
