@@ -47,6 +47,8 @@ public class UsersDAO {
         table.putItem(newUser);
 
         User user = new User(request.getFirstName(), request.getLastName(), request.getAlias(), request.getProfileImageURL());
+        user.setFollowersCount(0);
+        user.setFollowingCount(0);
 
         // authtoken will be changed in the RegisterServiceImpl and added to the authorizations table using the AuthorizationsDAO
         return new RegisterResponse(user, "token");

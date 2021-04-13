@@ -24,7 +24,6 @@ public class RegisterServiceImpl extends ServiceImpl implements IRegisterService
         try {
             // Upload Image to S3 and set imageURL to its location.
             request.setProfileImageURL(uploadImageToS3(request.getAlias(), request.getByteArray()));
-//            request.setProfileImageURL(MALE_IMAGE_URL);
 
             // Replace password with Hashed Password.
             request.setPassword(hashPassword(request.getPassword()));
@@ -34,7 +33,6 @@ public class RegisterServiceImpl extends ServiceImpl implements IRegisterService
 
         // Register
         RegisterResponse registerResponse = usersDAO.register(request);
-//        registerResponse.setSuccess(true);  // TODO: Figure out if this is necessary
 
         // Generate AuthToken and add it to authorizations table using the authorizationsDAO
         String authToken = UUID.randomUUID().toString();

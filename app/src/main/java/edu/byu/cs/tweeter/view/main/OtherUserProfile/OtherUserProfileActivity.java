@@ -103,8 +103,9 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
         // Set the user profile Image using image bytes
         ImageView userImageView = findViewById(R.id.otherUserProfilePicture);
         byte [] imageBytes = user.getImageBytes();
-        setImageViewWithByteArray(userImageView, imageBytes);
-
+        if (imageBytes != null){
+            setImageViewWithByteArray(userImageView, imageBytes);
+        }
 
         // Display the Follower Count
         TextView followerCount = findViewById(R.id.otherUserfollowerCount);

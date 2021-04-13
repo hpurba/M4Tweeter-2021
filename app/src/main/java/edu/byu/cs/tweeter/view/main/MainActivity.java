@@ -31,18 +31,29 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import edu.byu.cs.tweeter.R;
 import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.LogoutRequest;
 import edu.byu.cs.tweeter.model.service.request.TweetRequest;
+import edu.byu.cs.tweeter.model.service.response.FollowingResponse;
 import edu.byu.cs.tweeter.model.service.response.LogoutResponse;
 import edu.byu.cs.tweeter.model.service.response.TweetResponse;
 import edu.byu.cs.tweeter.presenter.LogoutPresenter;
 import edu.byu.cs.tweeter.presenter.TweetPresenter;
+import edu.byu.cs.tweeter.util.ByteArrayUtils;
 import edu.byu.cs.tweeter.view.asyncTasks.LogoutTask;
 import edu.byu.cs.tweeter.view.asyncTasks.TweetTask;
 import edu.byu.cs.tweeter.view.main.LoginRegister.LoginActivity;
+import edu.byu.cs.tweeter.view.util.ImageUtils;
 
 /**
  * The main activity for the application. Contains tabs for feed, story, following, and followers.
@@ -130,12 +141,83 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         TextView userAlias = findViewById(R.id.userAlias);
         userAlias.setText(user.getAlias());
 
-        // Set the user profile Image using image bytes
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // ORIGINAL
+//         Set the user profile Image using image bytes
         ImageView userImageView = findViewById(R.id.userImageMain);
-        byte [] imageBytes = user.getImageBytes();
-        setImageViewWithByteArray(userImageView, imageBytes);
-        // No longer used because we are using imagebytes (Old implementation)
-        // userImageView.setImageDrawable(ImageUtils.drawableFromByteArray(user.getImageBytes()));
+        byte [] imageBytes = user.getImageBytes();    // old method
+        if (imageBytes != null) {
+            setImageViewWithByteArray(userImageView, imageBytes);
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//        ImageView userImageView = findViewById(R.id.userImageMain);
+//        byte [] imageBytes = new byte[0];    // old method
+//        try {
+////            imageBytes = ByteArrayUtils.bytesFromUrl("https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
+////            imageBytes = fetchRemoteFile("https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        setImageViewWithByteArray(userImageView, imageBytes);
+
+//        byte[] imageBytes = new byte[0];
+//        try {
+//            imageBytes = fetchRemoteFile("https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40hpurba.png");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        try {
+////            imageBytes = ByteArrayUtils.bytesFromUrl(user.getImageUrl());
+////            imageBytes = ByteArrayUtils.bytesFromUrl("https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40hpurba.png");
+//
+//            String urlStr = "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40hpurba.png";
+//            URL url = new URL(urlStr);
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            InputStream is = null;
+//            try {
+//                is = url.openStream();
+//                byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
+//                int n;
+//
+//                while ( (n = is.read(byteChunk)) > 0 ) {
+//                    baos.write(byteChunk, 0, n);
+//                }
+//            }
+//            catch (IOException e) {
+//                System.err.printf ("Failed while reading bytes from %s: %s", url.toExternalForm(), e.getMessage());
+//                e.printStackTrace ();
+//                // Perform any other exception handling that's appropriate.
+//            }
+//            finally {
+//                if (is != null) { is.close(); }
+//            }
+//            imageBytes = baos.toByteArray();
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+//        try {
+//            setImageViewWithByteArray(userImageView, fetchRemoteFile(user.getImageUrl()));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Display the Followee Count
         TextView followeeCount = findViewById(R.id.followeeCount);
@@ -157,6 +239,23 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
     public static void setImageViewWithByteArray(ImageView view, byte[] data) {
         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
         view.setImageBitmap(bitmap);
+//        userImage.setImageDrawable(ImageUtils.drawableFromByteArray(user.getImageBytes()));
+    }
+
+    public static byte[] fetchRemoteFile(String location) throws Exception {
+        URL url = new URL(location);
+        InputStream is = null;
+        byte[] bytes = null;
+        try {
+            is = url.openStream ();
+            bytes = IOUtils.toByteArray(is);
+        } catch (IOException e) {
+            //handle errors
+        }
+        finally {
+            if (is != null) is.close();
+        }
+        return bytes;
     }
 
 
@@ -330,4 +429,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
     public String getUserAlias() {
         return user.getAlias();
     }
+
+
+
 }
