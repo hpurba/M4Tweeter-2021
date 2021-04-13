@@ -224,3 +224,11 @@ public class FeedTweetsDAO {
 }
 
  */
+
+
+/*
+// TODO: HOW TO CREATE THE DYNAMODB TABLE:
+// Tablename : Feeds
+// Primary key - Partition Key : Alias (String)
+               - Add sort key:  Timestamp (Number)
+ */
