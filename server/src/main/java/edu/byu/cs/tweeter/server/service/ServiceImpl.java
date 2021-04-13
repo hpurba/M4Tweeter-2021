@@ -29,9 +29,9 @@ public class ServiceImpl {
     //      https://www.google.com/search?q=milliseconds+to+minutes&oq=milliseconds+to+minutes&aqs=chrome..69i57j0i10j0i10i433j0i10l6j0i10i433.15592j0j7&sourceid=chrome&ie=UTF-8
     // public final long expirationDuration =      5000;  // 5 seconds
     // public final long expirationDuration =     20000;  // 20 seconds
-    public final long expirationDuration =       300000;  // 5 minutes
+//    public final long expirationDuration =       300000;  // 5 minutes
     // public final long expirationDuration =   3600000;  // 1 hour
-    // public final long expirationDuration =  86400000;  // 1 day 8.64e+7
+     public final long expirationDuration =  86400000;  // 1 day 8.64e+7
     // public final long expirationDuration = 604800000;  // 1 week 6.048e+8
 
     /**

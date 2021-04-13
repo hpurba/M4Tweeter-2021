@@ -15,6 +15,7 @@ public class Tweet implements Comparable<Tweet>, Serializable {
     // Constructor
     public Tweet(User user, String tweetText, long timestamp) {
         this.user = user;
+        user.setImageBytes(null);   // SETS THE IMAGE BYTE ARRAY TO NULL
         this.tweetText = tweetText;
         this.timestamp = timestamp;
     }

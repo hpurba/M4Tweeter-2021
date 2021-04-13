@@ -20,3 +20,61 @@ public class StoryTweetsHandler implements RequestHandler<StoryTweetsRequest, St
         return service.getStoryTweets(request);
     }
 }
+
+
+
+// StoryTweetsRequest
+/*
+
+
+
+{
+    "title": "StoryTweetsResponse",
+    "type": "object",
+    "properties": {
+        "tweets": {
+            "description": "The User's tweets",
+            "type": "array",
+            "items" : {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "type": "object",
+                        "properties": {
+                            "firstname": {
+                                "type": "string",
+                                "description": "The User's firstname"
+                            },
+                            "lastname": {
+                                "type": "string",
+                                "description": "The User's lastname"
+                            },
+                            "alias": {
+                                "type": "string",
+                                "description": "The User's alias"
+                            },
+                            "imageUrl": {
+                                "type": "string",
+                                "description": "The User's image as a url"
+                            },
+                            "imageBytes": {
+                                "type": "string",
+                                "description": "The User's image in a byteArray"
+                            }
+                        }
+                    },
+                    "tweetText": {
+                        "type": "string",
+                        "description": "The User's tweet as text"
+                    },
+                    "timestamp": {
+                        "type": "number",
+                        "description": "timestamp"
+                    }
+              }
+            }
+        }
+    }
+}
+
+ */

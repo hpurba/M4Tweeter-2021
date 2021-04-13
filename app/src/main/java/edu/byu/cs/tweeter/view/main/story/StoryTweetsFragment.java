@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.byu.cs.tweeter.R;
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.Tweet;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.StoryTweetsRequest;
@@ -30,9 +29,8 @@ import edu.byu.cs.tweeter.view.asyncTasks.GetStoryTweetsTask;
 public class StoryTweetsFragment extends Fragment implements StoryTweetsPresenter.View {
 
     private static final String LOG_TAG = "StoryTweetsFragment";
-    private static final String USER_KEY = "UserKey";
-    private static final String AUTH_TOKEN_KEY = "AuthTokenKey";
-
+    private static User CURRENT_USER_KEY;
+    private static String AUTH_TOKEN_KEY;
     private static final int LOADING_DATA_VIEW = 0;
     private static final int ITEM_VIEW = 1;
     private static final int PAGE_SIZE = 11;
@@ -53,8 +51,10 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
     public static StoryTweetsFragment newInstance(User user, String authToken) {
         StoryTweetsFragment fragment = new StoryTweetsFragment();
         Bundle args = new Bundle(2);
-        args.putSerializable(USER_KEY, user);
-        args.putSerializable(AUTH_TOKEN_KEY, authToken);
+//        args.putSerializable(CURRENT_USER_KEY, user);
+//        args.putSerializable(AUTH_TOKEN_KEY, authToken);
+        CURRENT_USER_KEY = user;
+        AUTH_TOKEN_KEY = authToken;
 
         fragment.setArguments(args);
         return fragment;
@@ -67,7 +67,7 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
         View view = inflater.inflate(R.layout.fragment_storytweets, container, false);
 
         //noinspection ConstantConditions
-        user = (User) getArguments().getSerializable(USER_KEY);
+//        user = (User) getArguments().getSerializable("CURRENT_USER_KEY");
 //        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
 
         presenter = new StoryTweetsPresenter(this);
@@ -252,7 +252,13 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
             addLoadingFooter();
 
             GetStoryTweetsTask getStoryTweetsTask = new GetStoryTweetsTask(presenter, this);
-            StoryTweetsRequest request = new StoryTweetsRequest(tweet, PAGE_SIZE, lastTweet, AUTH_TOKEN_KEY);
+
+            String authToken = AUTH_TOKEN_KEY;
+            authToken = getAuthToken();
+            User user = CURRENT_USER_KEY;
+            user = getUser();
+            StoryTweetsRequest request = new StoryTweetsRequest(user, PAGE_SIZE, lastTweet, authToken);
+
             getStoryTweetsTask.execute(request);
         }
 
@@ -308,6 +314,10 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
         private void removeLoadingFooter() {
             removeItem(tweets.get(tweets.size() - 1));
         }
+    }
+
+    private User getUser() {
+        return CURRENT_USER_KEY;
     }
 
     /**

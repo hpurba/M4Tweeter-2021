@@ -41,6 +41,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
     private User user;
     private String authToken;
     private Tweet tweet;
+    Tweet lastTweet = null;
     private FeedTweetsPresenter presenter;
 
     private FeedTweetsFragment.FeedTweetsRecyclerViewAdapter feedTweetsRecyclerViewAdapter;
@@ -101,7 +102,9 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
 
     @Override
     public Tweet getLastTweet() {
-        return feedTweetsRecyclerViewAdapter.lastTweet;
+        return lastTweet;
+//        if ()
+//        return feedTweetsRecyclerViewAdapter.lastTweet;
     }
 
     @Override

@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import edu.byu.cs.tweeter.model.domain.Tweet;
-import edu.byu.cs.tweeter.model.service.IFollowingService;
 import edu.byu.cs.tweeter.model.service.request.FeedTweetsRequest;
-import edu.byu.cs.tweeter.model.service.request.FollowingRequest;
 import edu.byu.cs.tweeter.model.service.response.FeedTweetsResponse;
 
 public class FeedTweetsServiceImplTest {

@@ -23,15 +23,14 @@ public class TweetHandler implements RequestHandler<TweetRequest, TweetResponse>
 }
 
 
-
-// This can be used as a test
+// TODO: THIS CAN BE USED TO TEST THE API GATEWAY FOR POSTING A TWEET
 /*
 {
     "tweet": {
         "user" : {
             "firstName": "hikaru",
             "lastName": "purba",
-            "alias": "hpurba",
+            "alias": "@hpurba",
             "imageUrl" : "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/@hpurba.png",
             "byteArray": null,
             "followersCount": "0",
@@ -42,5 +41,4 @@ public class TweetHandler implements RequestHandler<TweetRequest, TweetResponse>
     },
     "authToken": "91ea3688-ee0e-447d-b229-31eee9f5dde7"
 }
-
  */

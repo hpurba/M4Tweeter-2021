@@ -19,7 +19,7 @@ import java.util.Map;
  * which is the response Object.
  */
 class ClientCommunicator {
-    private static final int TIMEOUT_MILLIS = 20000;    // Connection timeout (10 sec. in milliseconds)
+    private static final int TIMEOUT_MILLIS = 10000;    // Connection timeout (10 sec. in milliseconds)
     private final String baseURL;                       // Base URL is the Invoke URL found in API:Tweeter stage:dev
 
     // Constructor for this ClientCommunicator

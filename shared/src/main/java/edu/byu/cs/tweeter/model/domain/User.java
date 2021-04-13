@@ -12,7 +12,8 @@ public class User implements Comparable<User>, Serializable {
     private String lastName;
     private String alias;
     private String imageUrl;
-    private byte [] imageBytes;
+    private byte[] imageBytes;
+//    private String imageBytes;
     private int followersCount;
     private int followingCount;
 
@@ -30,6 +31,12 @@ public class User implements Comparable<User>, Serializable {
     }
 
     // Uses imageBytes
+//    public User(String firstName, String lastName, byte[] imageBytes, String alias ) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.imageBytes = imageBytes;
+//        this.alias = alias;
+//    }
     public User(String firstName, String lastName, byte[] imageBytes, String alias ) {
         this.firstName = firstName;
         this.lastName = lastName;

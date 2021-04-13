@@ -23,8 +23,8 @@ public class StoriesDAO {
     private static final String TableName = "Stories";
 
     private static final String HandleAttribute = "Alias";
-    private static final String TweetContentAttribute = "Content";
     private static final String TimestampAttribute = "Timestamp";
+    private static final String TweetContentAttribute = "Content";
     private static final String FirstNameAttribute = "FirstName";
     private static final String LastNameAttribute = "LastName";
     private static final String ProfileImageURLAttribute = "ProfileImageURL";
@@ -46,9 +46,9 @@ public class StoriesDAO {
         Table table = dynamoDB.getTable(TableName);
 
         Item item = new Item()
-                .withPrimaryKey(HandleAttribute, request.getUsername())
+                .withPrimaryKey(HandleAttribute, request.getTweet().getUser().getAlias())
                 .withNumber(TimestampAttribute, request.getTweet().getTimestamp())
-                .withString(TweetContentAttribute, request.getTweetText())
+                .withString(TweetContentAttribute, request.getTweet().getTweetText())
                 .withString(FirstNameAttribute, request.getTweet().getUser().getFirstName())
                 .withString(LastNameAttribute, request.getTweet().getUser().getLastName())
                 .withString(ProfileImageURLAttribute, request.getTweet().getUser().getImageUrl());
@@ -67,7 +67,7 @@ public class StoriesDAO {
         attrNames.put("#handle", HandleAttribute);
 
         Map<String, AttributeValue> attrValues = new HashMap<>();
-        attrValues.put(":alias", new AttributeValue().withS(request.getTweet().getAlias()));
+        attrValues.put(":alias", new AttributeValue().withS(request.getUser().getAlias()));
 
         QueryRequest queryRequest = new QueryRequest()
                 .withTableName(TableName)
@@ -78,7 +78,7 @@ public class StoriesDAO {
 
         if (request.getLastTweet() != null) {
             Map<String, AttributeValue> startKey = new HashMap<>();
-            startKey.put(HandleAttribute, new AttributeValue().withS(request.getTweet().getAlias()));
+            startKey.put(HandleAttribute, new AttributeValue().withS(request.getUser().getAlias()));
             startKey.put(TimestampAttribute, new AttributeValue().withN(String.valueOf(request.getLastTweet().getTimestamp())));
 
             queryRequest = queryRequest.withExclusiveStartKey(startKey);

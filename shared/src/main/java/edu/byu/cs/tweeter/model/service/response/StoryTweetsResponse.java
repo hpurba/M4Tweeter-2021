@@ -65,3 +65,41 @@ public class StoryTweetsResponse extends PagedResponse {
         this.tweets = tweets;
     }
 }
+
+
+
+// API Gateway StoryTweetsResponse JSON Schema
+/*
+
+
+{
+    "title": "StoryTweetsResponse",
+    "type": "object",
+    "properties": {
+        "tweets": {
+            "description": "The User's tweets",
+            "type": "array",
+            "items" : {
+                "type": "object",
+                "properties": {
+                    "alias": {
+                        "type": "string",
+                        "description": "The User's alias"
+                    },
+                    "tweetText": {
+                        "type": "string",
+                        "description": "The User's tweet as text"
+                    },
+                    "userName": {
+                        "type": "string",
+                        "description": "The User's username"
+                    }
+              }
+            }
+        }
+    }
+}
+
+
+
+*/
