@@ -9,7 +9,7 @@ import edu.byu.cs.tweeter.model.domain.User;
 public class LoginResponse extends Response {
 
     private User user;
-    private AuthToken authToken;
+    private String authToken;
 
     /**
      * Creates a response indicating that the corresponding request was unsuccessful.
@@ -26,7 +26,7 @@ public class LoginResponse extends Response {
      * @param user the now logged in user.
      * @param authToken the auth token representing this user's session with the server.
      */
-    public LoginResponse(User user, AuthToken authToken) {
+    public LoginResponse(User user, String authToken) {
         super(true, null);
         this.user = user;
         this.authToken = authToken;
@@ -46,7 +46,7 @@ public class LoginResponse extends Response {
      *
      * @return the auth token.
      */
-    public AuthToken getAuthToken() {
+    public String getAuthToken() {
         return authToken;
     }
 
@@ -54,7 +54,7 @@ public class LoginResponse extends Response {
         this.user = user;
     }
 
-    public void setAuthToken(AuthToken authToken) {
+    public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }
 }

@@ -13,6 +13,12 @@ import edu.byu.cs.tweeter.server.service.LoginServiceImpl;
 public class LoginHandler implements RequestHandler<LoginRequest, LoginResponse> {
     @Override
     public LoginResponse handleRequest(LoginRequest loginRequest, Context context) {
+        if (loginRequest == null) {
+            throw new RuntimeException("[BadRequest400] 400 : request is null");
+        } else if (loginRequest.getUsername() == null || loginRequest.getPassword() == null) {
+            throw new RuntimeException("[BadRequest500] 500 : username or password is null");
+        }
+
         LoginServiceImpl loginService = new LoginServiceImpl();
         return loginService.login(loginRequest);
     }

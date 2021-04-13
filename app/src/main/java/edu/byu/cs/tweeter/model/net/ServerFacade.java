@@ -44,13 +44,14 @@ public class ServerFacade {
      * @throws TweeterRemoteException
      */
     public LoginResponse login(LoginRequest request, String urlPath) throws IOException, TweeterRemoteException {
-        LoginResponse response = clientCommunicator.doPost(urlPath, request, null, LoginResponse.class);
-        if(response.isSuccess()) {
-            return response;
-        } else {
-            // TODO: potentially consider changing this to handle somewhere the error 400 and 500 response codes.
-            throw new RuntimeException(response.getMessage());
-        }
+        return clientCommunicator.doPost(urlPath, request, null, LoginResponse.class);
+//        LoginResponse response = clientCommunicator.doPost(urlPath, request, null, LoginResponse.class);
+//        if(response.isSuccess()) {
+//            return response;
+//        } else {
+//            // TODO: potentially consider changing this to handle somewhere the error 400 and 500 response codes.
+//            throw new RuntimeException(response.getMessage());
+//        }
     }
 
     /**

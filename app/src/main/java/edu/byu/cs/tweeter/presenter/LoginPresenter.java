@@ -51,6 +51,7 @@ public class LoginPresenter {
         if (loginRequest.getUsername() == null || loginRequest.getPassword() == null){
             throw new IOException();
         }
+
         return loginService.login(loginRequest);
     }
 
@@ -66,4 +67,5 @@ public class LoginPresenter {
     //    public void showLoggingInToast() {
     //        view.showLoggingInToast();
     //    }
+
 }

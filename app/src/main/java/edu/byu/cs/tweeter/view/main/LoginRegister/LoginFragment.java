@@ -61,8 +61,8 @@ public class LoginFragment extends Fragment implements LoginPresenter.View, Logi
             @Override
             public void onClick(View view) {
                 // Show the Toast
-                loginInToast = Toast.makeText(getActivity(), "Logging In", Toast.LENGTH_LONG);
-                loginInToast.show();
+//                loginInToast = Toast.makeText(getActivity(), "Logging In", Toast.LENGTH_LONG);
+//                loginInToast.show();
                 // This is wasteful but for demonstrative purposes. Use the above for the toast.
                 //  presenter.showLoggingInToast();
 
@@ -82,6 +82,10 @@ public class LoginFragment extends Fragment implements LoginPresenter.View, Logi
      */
     @Override
     public void loginSuccessful(LoginResponse loginResponse) {
+        // Show logging in toast after it has been verified that a successful login has been made.
+        loginInToast = Toast.makeText(getActivity(), "Logging In", Toast.LENGTH_LONG);
+        loginInToast.show();
+
         Intent intent = new Intent(getActivity().getBaseContext(), MainActivity.class);
 
         intent.putExtra(MainActivity.CURRENT_USER_KEY, loginResponse.getUser());
@@ -99,7 +103,21 @@ public class LoginFragment extends Fragment implements LoginPresenter.View, Logi
      */
     @Override
     public void loginUnsuccessful(LoginResponse loginResponse) {
-        Toast.makeText(getActivity(), "Failed to login. " + loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+
+        // Check if login fields were empty or not
+        if (getUsernameText().equals("") || getPasswordText().equals("")) {
+            Toast.makeText(getActivity(), "Enter @username and password", Toast.LENGTH_LONG).show();
+        }
+        else {
+            if (loginResponse.getMessage().equals("Password is invalid")) {
+                Toast.makeText(getActivity(), "Failed to login. " + loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+                emptyPasswordField();
+            }
+            else {
+                Toast.makeText(getActivity(), "Failed to login. " + loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+                emptyUsernameField();
+            }
+        }
     }
 
     /**
@@ -133,6 +151,14 @@ public class LoginFragment extends Fragment implements LoginPresenter.View, Logi
         return password;
     }
 
+
+    public void emptyPasswordField() {
+        passwordEditText.setText("");
+    }
+
+    public void emptyUsernameField() {
+        usernameEditText.setText("");
+    }
     /**
      * This is for demonstrative purposes only.
      * Demonstrates how view will call presenter for a method which involves logic.

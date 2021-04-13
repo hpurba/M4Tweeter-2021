@@ -5,7 +5,9 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 
 import edu.byu.cs.tweeter.model.domain.User;
+import edu.byu.cs.tweeter.model.service.request.LoginRequest;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
+import edu.byu.cs.tweeter.model.service.response.LoginResponse;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
 
 public class UsersDAO {
@@ -59,12 +61,12 @@ public class UsersDAO {
      * @param request
      * @return
      */
-    public RegisterResponse login(RegisterRequest request) {
+    public LoginResponse login(LoginRequest request) {
         Table table = dynamoDB.getTable(TableName);
 
-        Item item = table.getItem(UsernameAttribute, request.getAlias());
+        Item item = table.getItem(UsernameAttribute, request.getUsername());
         if (item == null) {
-            return new RegisterResponse("User is not found");
+            return new LoginResponse("User was not found. Check alias spelling.");
         }
 
         String alias = item.getString(UsernameAttribute);
@@ -74,10 +76,10 @@ public class UsersDAO {
         String password = item.getString(PasswordAttribute);
 
         if (!password.equals(request.getPassword())) {
-            return new RegisterResponse("Password is invalid");
+            return new LoginResponse("Password is invalid");
         }
 
-        return new RegisterResponse(new User(first_name, last_name, alias, image_url), "token");
+        return new LoginResponse(new User(first_name, last_name, alias, image_url), "token");
     }
 
 
