@@ -176,5 +176,51 @@ public class FeedTweetsDAO {
 //        return tweetsIndex;
 //    }
 
-
 }
+
+
+
+
+
+
+
+/*
+
+{
+    "tweet": {
+        "alias": "hpurba",
+        "tweetText": "tweetText",
+        "userName": "hpurba",
+        {
+        "type": "string",
+        "description": "The User's username"
+        }
+
+    },
+    "limit": {
+        "description": "The User's username",
+        "type": "number"
+    },
+    "lastTweet": {
+      "type": "object",
+      "properties": {
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "tweetText": {
+        "type": "string",
+        "description": "The User's tweet as text"
+        },
+        "userName": {
+        "type": "string",
+        "description": "The User's username"
+        }
+      }
+    },
+    "authToken": {
+      "type": "string",
+      "description": "The authToken attatched to this request."
+}
+
+ */

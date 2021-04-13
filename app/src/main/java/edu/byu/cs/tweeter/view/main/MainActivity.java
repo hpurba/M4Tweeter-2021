@@ -62,8 +62,8 @@ import edu.byu.cs.tweeter.view.util.ImageUtils;
  */
 public class MainActivity extends AppCompatActivity implements LogoutPresenter.View, LogoutTask.Observer, TweetPresenter.View, TweetTask.Observer {
 
-    public static final String CURRENT_USER_KEY = "CurrentUser";
-    public static final String AUTH_TOKEN_KEY = "AuthTokenKey";
+    public static String CURRENT_USER_KEY = "CurrentUser";
+    public static String AUTH_TOKEN_KEY = "AuthTokenKey";
 //    public static final String FOLLOWING_BOOL = "followingBool";
 
     private LogoutPresenter logoutPresenter;
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         tweetPresenter = new TweetPresenter(this);
 
         user = (User) getIntent().getSerializableExtra(CURRENT_USER_KEY);
+        user = getUser();
 
         if(user == null) {
             throw new RuntimeException("User not passed to activity");
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
     }
 
     public User getUser() {
-        return getIntent().getStringArrayExtra("CURRENT_USER_KEY");
+        return (User) getIntent().getSerializableExtra("CURRENT_USER_KEY");
     }
 
     @Override
