@@ -29,11 +29,11 @@
             tools:text="@string/sampleAlias"/>
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/NameOfUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            tools:text="sampleTweet"/>
+            tools:text="FirstName LastName"/>
 
         <TextView
             android:id="@+id/tweetTextInRow"

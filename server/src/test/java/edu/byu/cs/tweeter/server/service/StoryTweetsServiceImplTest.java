@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import edu.byu.cs.tweeter.model.domain.Tweet;
+import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.StoryTweetsRequest;
 import edu.byu.cs.tweeter.model.service.response.StoryTweetsResponse;
 
@@ -27,15 +28,17 @@ public class StoryTweetsServiceImplTest {
      */
     @BeforeEach
     public void setup() throws IOException {
-        Tweet currentTweet = new Tweet("@TestUser", "The greatest glory in living lies not in never falling, but in rising every time we fall.", "userName");
-        Tweet resultTweet1 = new Tweet("@TestUser", "The way to get started is to quit talking and begin doing.", "userName");
-        Tweet resultTweet2 = new Tweet("@TestUser", "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.", "userName");
-        Tweet resultTweet3 = new Tweet("@TestUser", "If life were predictable it would cease to be life, and be without flavor.", "userName");
+
+        User user = new User("Hikaru", "Purba", "@hpurba", "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40hpurba.png");
+        Tweet currentTweet = new Tweet(user, "The greatest glory in living lies not in never falling, but in rising every time we fall.", 100000000);
+        Tweet resultTweet1 = new Tweet(user, "The way to get started is to quit talking and begin doing.", 100000000);
+        Tweet resultTweet2 = new Tweet(user, "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.", 100000000);
+        Tweet resultTweet3 = new Tweet(user, "If life were predictable it would cease to be life, and be without flavor.", 100000000);
 
 
         // Setup request objects to use in the tests
-        validRequest = new StoryTweetsRequest(currentTweet, 3, null);
-        invalidRequest = new StoryTweetsRequest(null, 0, null);
+        validRequest = new StoryTweetsRequest(user, 3, null, "authTokenGoesHere");
+        invalidRequest = new StoryTweetsRequest(null, 0, null, "authTokenGoesHere");
 
         // Setup a mock ServerFacade that will return known responses
         successResponse = new StoryTweetsResponse(Arrays.asList(resultTweet1, resultTweet2, resultTweet3), false);

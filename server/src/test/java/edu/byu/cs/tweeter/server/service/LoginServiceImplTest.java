@@ -46,14 +46,14 @@ public class LoginServiceImplTest {
         String password = "password";
 
         String AUTH_TOKEN_KEY = "AuthTokenKey";
-        AuthToken authToken = new AuthToken();
+//        AuthToken authToken = new AuthToken();
 
         // Requests (Valid and Invalid)
         validRequest = new LoginRequest(username, password);
         invalidRequest = new LoginRequest(null, null);
 
         // Setup a mock ServerFacade that will return known responses
-        successResponse = new LoginResponse(user, new AuthToken());
+        successResponse = new LoginResponse(user, AUTH_TOKEN_KEY);
         failureResponse = new LoginResponse("An exception occurred");
 
         loginServiceImplSpy = Mockito.mock(LoginServiceImpl.class);

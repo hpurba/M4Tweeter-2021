@@ -96,6 +96,7 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
     private class StoryTweetsHolder extends RecyclerView.ViewHolder {
         private final TextView userAlias;
         private final TextView tweetText;
+        private final TextView userFullName;
         /**
          * Creates an instance and sets an OnClickListener for the user's row.
          *
@@ -106,6 +107,7 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
 
             if(viewType == ITEM_VIEW) {
                 userAlias = itemView.findViewById(R.id.userAliasForTweet);
+                userFullName = itemView.findViewById(R.id.NameOfUser);
                 tweetText = itemView.findViewById(R.id.tweetTextInRow);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +118,7 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
                 });
             } else {
                 userAlias = null;
+                userFullName = null;
                 tweetText = null;
             }
         }
@@ -127,6 +130,7 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
         void bindTweet(Tweet tweet) {
 
             userAlias.setText(tweet.getAlias());
+            userFullName.setText(tweet.getUser().getFirstName() + " " + tweet.getUser().getLastName());
             tweetText.setText(tweet.getTweetText());
         }
     }
