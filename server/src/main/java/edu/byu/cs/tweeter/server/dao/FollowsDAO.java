@@ -48,20 +48,20 @@ public class FollowsDAO {
      * @param request
      * @return
      */
-    public FollowingStatusResponse changeToFollow(FollowingStatusRequest request) {
+    public FollowingStatusResponse changeToFollow(FollowingStatusRequest request, User otherUser) {
         Table table = dynamoDB.getTable(TableName);
 
         Item item = new Item()
-                .withPrimaryKey(FollowerAliasAttribute, request.getFollowerUser().getAlias(), FolloweeAliasAttribute, request.getFolloweeUser().getAlias())
-                .withString(FollowerFirstNameAttribute, request.getFollowerUser().getFirstName())
-                .withString(FollowerLastNameAttribute, request.getFollowerUser().getLastName())
-                .withString(FollowerProfileImageURLAttribute, request.getFollowerUser().getImageUrl())
-                .withString(FolloweeFNameAttr, request.getFolloweeUser().getFirstName())
-                .withString(FolloweeLNameAttr, request.getFolloweeUser().getLastName())
-                .withString(FolloweeProfileImageURLAttr, request.getFolloweeUser().getImageUrl());
+                .withPrimaryKey(FollowerAliasAttribute, request.getUser().getAlias(), FolloweeAliasAttribute, otherUser.getAlias())
+                .withString(FollowerFirstNameAttribute, request.getUser().getFirstName())
+                .withString(FollowerLastNameAttribute, request.getUser().getLastName())
+                .withString(FollowerProfileImageURLAttribute, request.getUser().getImageUrl())
+                .withString(FolloweeFNameAttr, otherUser.getFirstName())
+                .withString(FolloweeLNameAttr, otherUser.getLastName())
+                .withString(FolloweeProfileImageURLAttr, otherUser.getImageUrl());
         table.putItem(item);
 
-        return new FollowingStatusResponse(request.getFolloweeUser().getAlias(), true);
+        return new FollowingStatusResponse(request.getUser(), true);
     }
 
     /**
@@ -69,10 +69,10 @@ public class FollowsDAO {
      * @param request
      * @return
      */
-    public FollowingStatusResponse changeToUnFollow(FollowingStatusRequest request) {
+    public FollowingStatusResponse changeToUnFollow(FollowingStatusRequest request, User otherUser) {
         Table table = dynamoDB.getTable(TableName);
-        table.deleteItem(FollowerAliasAttribute, request.getFollowerUser().getAlias(), FolloweeAliasAttribute, request.getFolloweeUser().getAlias());
-        return new FollowingStatusResponse(request.getFolloweeUser().getAlias(), true);
+        table.deleteItem(FollowerAliasAttribute, request.getUser().getAlias(), FolloweeAliasAttribute, otherUser.getAlias());
+        return new FollowingStatusResponse(request.getUser(), true);
     }
 
     /**
@@ -179,14 +179,17 @@ public class FollowsDAO {
      * @param request
      * @return
      */
-    public FollowingStatusResponse checkFollow(FollowingStatusRequest request) {
+    public FollowingStatusResponse checkFollow(FollowingStatusRequest request, User otherUser) {
         Table table = dynamoDB.getTable(TableName);
 
         boolean follows = false;
-        Item item = table.getItem(FollowerAliasAttribute, request.getFolloweeUser().getAlias(), FolloweeAliasAttribute, request.getFollowerUser().getAlias());
+        Item item = table.getItem(FollowerAliasAttribute, otherUser.getAlias(), FolloweeAliasAttribute, request.getUser().getAlias());
         if (item != null) {
             follows = true;
         }
-        return new FollowingStatusResponse(request.getFolloweeUser().getAlias(), follows);
+        return new FollowingStatusResponse(otherUser, follows);
     }
 }
+
+// Follower: User
+// Followee: OtherUser

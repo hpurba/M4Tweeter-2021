@@ -4,8 +4,8 @@ import edu.byu.cs.tweeter.model.domain.User;
 
 public class FollowingStatusRequest {
 
-    private User followerUser;
-    private User followeeUser;
+    private User user;
+    private String otherUserAlias;
     private Boolean isFollowing;
     private String authToken;
 
@@ -15,31 +15,33 @@ public class FollowingStatusRequest {
     public FollowingStatusRequest() {}
 
     /**
-     * Creates an instance.
-     * @param followeeUser  User logged in. (unless another user is selected)
-     * @param followerUser
+     *
+     * @param user
+     * @param otherUserAlias
      * @param isFollowing
+     * @param authToken
      */
-    public FollowingStatusRequest(User followeeUser, User followerUser, Boolean isFollowing) {
-        this.followeeUser = followeeUser;
-        this.followerUser = followerUser;
+    public FollowingStatusRequest(User user, String otherUserAlias, Boolean isFollowing, String authToken) {
+        this.user = user;
+        this.otherUserAlias = otherUserAlias;
         this.isFollowing = isFollowing;
+        this.authToken = authToken;
     }
 
-    public User getFollowerUser() {
-        return followerUser;
+    public User getUser() {
+        return user;
     }
 
-    public void setFollowerUser(User followerUser) {
-        this.followerUser = followerUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public User getFolloweeUser() {
-        return followeeUser;
+    public String getOtherUserAlias() {
+        return otherUserAlias;
     }
 
-    public void setFolloweeUser(User followeeUser) {
-        this.followeeUser = followeeUser;
+    public void setOtherUserAlias(String otherUserAlias) {
+        this.otherUserAlias = otherUserAlias;
     }
 
     public Boolean getFollowing() {
@@ -61,8 +63,28 @@ public class FollowingStatusRequest {
 
 
 
+// TODO: THis is a sample request for testing
+/*
+
+{
+    "user": {
+        "firstName": "Rocky",
+        "lastName": "Purba",
+        "alias": "@rpurba",
+        "imageUrl": "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/@rpurba.png",
+        "imageBytes": null
+    },
+      "otherUserAlias": "@hpurba",
+      "isFollowing": true,
+      "authToken" : "005698fc-82ce-4b3d-b961-67e43c2dc207"
+}
+
+ */
+
+
 // TODO: THIS IS THE NEW SHCEMA
 /*
+
 
 {
   "title": "FollowingStatusRequest",
@@ -93,31 +115,10 @@ public class FollowingStatusRequest {
         }
       }
     },
-    "user": {
-      "type": "object",
-      "properties": {
-        "firstname": {
-        "type": "string",
-        "description": "The User's firstname"
-        },
-        "lastname": {
-        "type": "string",
-        "description": "The User's lastname"
-        },
-        "alias": {
-        "type": "string",
-        "description": "The User's alias"
-        },
-        "imageUrl": {
-        "type": "string",
-        "description": "The User's image as a url"
-        },
-        "imageBytes": {
-        "type": "string",
-        "description": "The User's image in a byteArray"
-        }
-      }
-    },
+    "otherUserAlias": {
+      "type": "string",
+      "description": "the other user's alias"
+      },
     "isFollowing": {
       "type": "boolean",
       "description":"Boolean that tells the app if user is following other user or not."
@@ -131,7 +132,6 @@ public class FollowingStatusRequest {
 
 
  */
-
 
 
 // TODO: THIS IS THE OLD SCHEMA

@@ -90,20 +90,20 @@ public class UsersDAO {
     }
 
 
-    public RegisterResponse getUser(RegisterRequest request) {
+    public User getUser(String alias) {
         Table table = dynamoDB.getTable(TableName);
 
-        Item item = table.getItem(UsernameAttribute, request.getAlias());
+        Item item = table.getItem(UsernameAttribute, alias);
         if (item == null) {
-            return new RegisterResponse("Unable to find user");
+            return null;
         }
 
-        String alias = item.getString(UsernameAttribute);
-        String first_name = item.getString(FirstNameAttribute);
-        String last_name = item.getString(LastNameAttribute);
+        String userAlias = item.getString(UsernameAttribute);
+        String firstName = item.getString(FirstNameAttribute);
+        String lastName = item.getString(LastNameAttribute);
         String profileImageURL = item.getString(ProfileImageURLAttribute);
 
-        return new RegisterResponse(new User(first_name, last_name, alias, profileImageURL), "tempAuthTokenInUsersDAO");    // TODO: Fix this.
+        return new User(firstName, lastName, userAlias, profileImageURL);
     }
 
     public void deleteUser(User user) {
