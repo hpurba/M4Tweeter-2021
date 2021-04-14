@@ -6,6 +6,7 @@ import edu.byu.cs.tweeter.model.net.ServerFacade;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.LogoutRequest;
 import edu.byu.cs.tweeter.model.service.response.LogoutResponse;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.ILogoutService;
 
 public class LogoutService extends BaseService implements ILogoutService {
     // The url_path extension for logout. (Can be found in AWS console -> API:Tweeter -> Stages -> dev tab)

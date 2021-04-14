@@ -6,6 +6,7 @@ import edu.byu.cs.tweeter.model.net.ServerFacade;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.TweetRequest;
 import edu.byu.cs.tweeter.model.service.response.TweetResponse;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.ITweetService;
 
 public class TweetService extends BaseService implements ITweetService {
     // The url_path extension for tweet. (Can be found in AWS console -> API:Tweeter -> Stages -> dev tab)

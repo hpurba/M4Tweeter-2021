@@ -1,24 +1,12 @@
 package edu.byu.cs.tweeter.model.service;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-
-import org.apache.commons.io.IOUtils;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import edu.byu.cs.tweeter.model.net.ServerFacade;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
-import edu.byu.cs.tweeter.util.ByteArrayUtils;
-
-import static edu.byu.cs.tweeter.util.ByteArrayUtils.bytesFromInputStream;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.IRegisterService;
 
 public class RegisterService extends BaseService implements IRegisterService {
     // The url_path extension for register. (Can be found in AWS console -> API:Tweeter -> Stages -> dev tab)

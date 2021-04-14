@@ -1,4 +1,4 @@
-package edu.byu.cs.tweeter.model.service;
+package edu.byu.cs.tweeter.model.service.serviceInterfaces;
 
 import java.io.IOException;
 

@@ -3,7 +3,7 @@ package edu.byu.cs.tweeter.server.service;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import edu.byu.cs.tweeter.model.service.ILoginService;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.ILoginService;
 import edu.byu.cs.tweeter.model.service.request.LoginRequest;
 import edu.byu.cs.tweeter.model.service.response.LoginResponse;
 import edu.byu.cs.tweeter.server.dao.AuthorizationsDAO;

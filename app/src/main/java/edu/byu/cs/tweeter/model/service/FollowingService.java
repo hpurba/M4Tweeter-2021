@@ -5,6 +5,7 @@ import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.FollowingRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowingResponse;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.IFollowingService;
 import edu.byu.cs.tweeter.util.ByteArrayUtils;
 
 /**

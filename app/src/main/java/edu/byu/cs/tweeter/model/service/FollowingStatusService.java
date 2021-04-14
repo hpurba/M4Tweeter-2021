@@ -6,6 +6,7 @@ import edu.byu.cs.tweeter.model.net.ServerFacade;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.FollowingStatusRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowingStatusResponse;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.IFollowingStatusService;
 
 /**
  * FollowingStatusService extends the BaseService Abstract Class to see if the user is Following

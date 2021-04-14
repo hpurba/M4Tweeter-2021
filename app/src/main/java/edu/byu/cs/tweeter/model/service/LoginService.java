@@ -6,6 +6,7 @@ import edu.byu.cs.tweeter.model.net.ServerFacade;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.LoginRequest;
 import edu.byu.cs.tweeter.model.service.response.LoginResponse;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.ILoginService;
 import edu.byu.cs.tweeter.util.ByteArrayUtils;
 
 /**

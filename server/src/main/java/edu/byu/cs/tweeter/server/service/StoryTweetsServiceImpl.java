@@ -1,6 +1,6 @@
 package edu.byu.cs.tweeter.server.service;
 
-import edu.byu.cs.tweeter.model.service.IStoryTweetsService;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.IStoryTweetsService;
 import edu.byu.cs.tweeter.model.service.request.StoryTweetsRequest;
 import edu.byu.cs.tweeter.model.service.response.StoryTweetsResponse;
 import edu.byu.cs.tweeter.server.dao.StoriesDAO;

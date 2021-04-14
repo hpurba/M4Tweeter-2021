@@ -6,6 +6,7 @@ import edu.byu.cs.tweeter.model.net.ServerFacade;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.FeedTweetsRequest;
 import edu.byu.cs.tweeter.model.service.response.FeedTweetsResponse;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.IFeedTweetsService;
 
 /**
  * FeedTweetsService extends the BaseService Abstract Class to get the Tweets for the Feed.

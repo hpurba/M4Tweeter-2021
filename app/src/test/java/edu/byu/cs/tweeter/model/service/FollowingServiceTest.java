@@ -11,6 +11,7 @@ import java.util.Arrays;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.FollowingRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowingResponse;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.IFollowingService;
 
 public class FollowingServiceTest {
 
@@ -57,7 +58,7 @@ public class FollowingServiceTest {
     }
 
     /**
-     * Verify that for successful requests the {@link IFollowingService#getFollowees(FollowingRequest)}
+     * Verify that for successful requests the {@link edu.byu.cs.tweeter.model.service.serviceInterfaces.IFollowingService#getFollowees(FollowingRequest)}
      * method returns the same result as the {@link edu.byu.cs.tweeter.model.net.ServerFacade}.
      * .
      *
@@ -70,7 +71,7 @@ public class FollowingServiceTest {
     }
 
     /**
-     * Verify that the {@link IFollowingService#getFollowees(FollowingRequest)} method loads the
+     * Verify that the {@link edu.byu.cs.tweeter.model.service.serviceInterfaces.IFollowingService#getFollowees(FollowingRequest)} method loads the
      * profile image of each user included in the result.
      *
      * @throws IOException if an IO error occurs.

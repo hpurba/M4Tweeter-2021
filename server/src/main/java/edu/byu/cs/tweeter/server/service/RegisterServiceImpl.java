@@ -3,7 +3,7 @@ package edu.byu.cs.tweeter.server.service;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import edu.byu.cs.tweeter.model.service.IRegisterService;
+import edu.byu.cs.tweeter.model.service.serviceInterfaces.IRegisterService;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
 import edu.byu.cs.tweeter.server.dao.AuthorizationsDAO;

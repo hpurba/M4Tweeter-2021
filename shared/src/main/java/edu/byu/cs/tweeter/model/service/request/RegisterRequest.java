@@ -8,7 +8,6 @@ public class RegisterRequest {
     private String password;
     public String byteArray;
     public String profileImageURL;
-//    public byte[] byteArray;    // this should be a string.
     // Encode image in Base64 String and decode it on the back end.
 
     /**
