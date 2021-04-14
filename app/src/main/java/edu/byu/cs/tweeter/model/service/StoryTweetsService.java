@@ -2,10 +2,14 @@ package edu.byu.cs.tweeter.model.service;
 
 import java.io.IOException;
 
+import edu.byu.cs.tweeter.model.domain.Tweet;
+import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.net.ServerFacade;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.StoryTweetsRequest;
+import edu.byu.cs.tweeter.model.service.response.FollowingResponse;
 import edu.byu.cs.tweeter.model.service.response.StoryTweetsResponse;
+import edu.byu.cs.tweeter.util.ByteArrayUtils;
 
 public class StoryTweetsService extends BaseService implements IStoryTweetsService {
     // The url_path extension for story tweets. (Can be found in AWS console -> API:Tweeter -> Stages -> dev tab)
@@ -42,5 +46,20 @@ public class StoryTweetsService extends BaseService implements IStoryTweetsServi
     public void doServiceSpecificTask() throws IOException, TweeterRemoteException {
         ServerFacade serverFacade = getServerFacade();
         this.storyTweetsResponse = serverFacade.getStoryTweets(storyTweetsRequest, URL_PATH);
+        if(storyTweetsResponse.isSuccess()) {
+            loadImages(storyTweetsResponse);
+        }
+    }
+
+    /**
+     * Loads the profile image data for each story tweet included in the response.
+     * @param response  the response from the storyTweetRequest.
+     * @throws IOException
+     */
+    private void loadImages(StoryTweetsResponse response) throws IOException {
+        for(Tweet tweet : response.getTweets()) {
+            byte [] bytes = ByteArrayUtils.bytesFromUrl(tweet.getUser().getImageUrl());
+            tweet.getUser().setImageBytes(bytes);
+        }
     }
 }
