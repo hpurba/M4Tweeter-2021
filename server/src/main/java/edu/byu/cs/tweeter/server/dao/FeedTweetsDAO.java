@@ -110,71 +110,11 @@ public class FeedTweetsDAO {
 
 
     // TODO: Implement some exception catching and make sure it is actually needed.
-//    public void deleteTweet(User owner, long timestamp) {
-//        Table table = dynamoDB.getTable(TableName);
-//        table.deleteItem(HandleAttribute, owner.getAlias(), TimestampAttribute, timestamp);
-//    }
+    public void deleteTweet(User owner, long timestamp) {
+        Table table = dynamoDB.getTable(TableName);
+        table.deleteItem(HandleAttribute, owner.getAlias(), TimestampAttribute, timestamp);
+    }
 
-
-
-
-
-//    public FeedTweetsResponse getFeedTweets(FeedTweetsRequest request) {
-//        // This is a List of all the dummy Tweets.
-//        List<Tweet> allTweets = getDummyTweets();
-//
-//        // Set the request Limit to request.getLimit();
-//        int requestLimit = request.getLimit();
-//        if (requestLimit < 8) { // Ensure the request limit is at least 8.
-//            requestLimit = 8;
-//        }
-//
-//        // This is a List of the responseTweets
-//        List<Tweet> responseTweets = new ArrayList<>(requestLimit);
-//
-//        boolean hasMorePages = true;
-//        if( requestLimit > 0) {
-//            int tweetsIndex = getTweetsStartingIndex(request.getLastTweet(), allTweets);    // 0 if the first element.
-//
-//            for(int limitCounter = 0; tweetsIndex < allTweets.size() && limitCounter < requestLimit; tweetsIndex++, limitCounter++) {
-//                responseTweets.add(allTweets.get(tweetsIndex));
-//            }
-//
-//            hasMorePages = tweetsIndex < allTweets.size();
-//        }
-//
-//        return new FeedTweetsResponse(responseTweets, hasMorePages);  // Original
-////        return new FeedTweetsResponse(allTweets, hasMorePages);
-//    }
-
-    /**
-     * Determines the index for the first tweet in the specified 'allTweets' list that should
-     * be returned in the current request. This will be the index of the next tweet after the
-     * specified 'lastTweet'.
-     *
-     * @param lastTweet the last tweet that was returned in the previous request or null if
-     *                     there was no previous request.
-     * @param allTweets the generated list of tweets from which we are returning paged results.
-     * @return the index of the first tweet to be returned.
-     */
-//    private int getTweetsStartingIndex(Tweet lastTweet, List<Tweet> allTweets) {
-//
-//        int tweetsIndex = 0;
-//
-//        if(lastTweet != null) {
-//            // This is a paged request for something after the first page. Find the first item
-//            // we should return
-//            for (int i = 0; i < allTweets.size(); i++) {
-//                if(lastTweet.equals(allTweets.get(i))) {
-//                    // We found the index of the last item returned last time. Increment to get
-//                    // to the first one we should return
-//                    tweetsIndex = i + 1;
-//                    break;
-//                }
-//            }
-//        }
-//        return tweetsIndex;
-//    }
 
 }
 

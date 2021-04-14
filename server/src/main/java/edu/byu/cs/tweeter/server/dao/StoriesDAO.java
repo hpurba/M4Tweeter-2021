@@ -119,8 +119,8 @@ public class StoriesDAO {
 
 
     // TODO: This may not be needed to be done, but.... This needs some error handling too
-//    public void deleteTweet(User author, long timestamp) {
-//        Table table = dynamoDB.getTable(TableName);
-//        table.deleteItem(HandleAttr, author.getAlias(), TimestampAttr, timestamp);
-//    }
+    public void deleteTweet(User author, long timestamp) {
+        Table table = dynamoDB.getTable(TableName);
+        table.deleteItem(HandleAttribute, author.getAlias(), TimestampAttribute, timestamp);
+    }
 }

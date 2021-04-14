@@ -75,6 +75,7 @@ public class ServiceImpl {
                 .standard()
                 .build();
         String file_name = userAlias + ".png";
+        // BUCKET NAME
         String bucket_name = "tweeteruserprofileimages";
 
         InputStream stream = new ByteArrayInputStream(decodedImageByteArray);
@@ -84,13 +85,14 @@ public class ServiceImpl {
 
         try{
             s3.putObject(new PutObjectRequest(bucket_name, file_name, stream, meta)
-                    .withCannedAcl(CannedAccessControlList.PublicRead));
+                    .withCannedAcl(CannedAccessControlList.PublicRead));    // Remember to do PublicRead or it cant be fetched.
             stream.close();
         }
         catch (Exception e) {
             throw new Exception("Could not upload" + e.toString());
         }
 
+        // Return the generated url. IT is generated like so.
         return "https://" + bucket_name + ".s3-us-west-2.amazonaws.com/" + file_name;
     }
 

@@ -31,17 +31,17 @@ public class TweetServiceImplTest {
         String alias = "@hpurba";
         String tweetText = "I am Hikaru!";
 
-        Tweet tweet1 = new Tweet("@AllenAnderson", "I am Allen! Nice to meet you all!", "userName");
+//        Tweet tweet1 = new Tweet("@AllenAnderson", "I am Allen! Nice to meet you all!", "userName");
 
-        User user = new User("Test", "User","https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
+//        User user = new User("Test", "User","https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
 
         // Setup request objects to use in the tests
-        validRequest = new TweetRequest(alias, tweetText);
+//        validRequest = new TweetRequest(alias, tweetText);
         invalidRequest = new TweetRequest(null, null);
 
         // Setup a mock ServerFacade that will return known responses
-        successResponse = new TweetResponse(user); // success is true and message is null
-        failureResponse = new TweetResponse((User) null);
+//        successResponse = new TweetResponse(user); // success is true and message is null
+//        failureResponse = new TweetResponse((User) null);
 
         TweetServiceImplSpy = Mockito.mock(TweetServiceImpl.class);
         Mockito.when(TweetServiceImplSpy.tweet(validRequest)).thenReturn(successResponse);

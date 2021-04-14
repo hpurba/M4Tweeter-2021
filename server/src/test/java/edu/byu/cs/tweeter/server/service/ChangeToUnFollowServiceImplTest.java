@@ -6,7 +6,6 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.FollowingStatusRequest;
@@ -39,12 +38,11 @@ public class ChangeToUnFollowServiceImplTest {
         String password = "password";
 
         String AUTH_TOKEN_KEY = "AuthTokenKey";
-        AuthToken authToken = new AuthToken();
 
-        validRequest = new FollowingStatusRequest(user, true);
-        invalidRequest = new FollowingStatusRequest(null, null);
+//        validRequest = new FollowingStatusRequest(user, true);
+//        invalidRequest = new FollowingStatusRequest(null, null);
 
-        validResponse = new FollowingStatusResponse(username, false);
+//        validResponse = new FollowingStatusResponse(username, false);
         invalidResponse = new FollowingStatusResponse("An exception occurred");
 
         implSpy = Mockito.mock(ChangeToUnFollowServiceImpl.class);

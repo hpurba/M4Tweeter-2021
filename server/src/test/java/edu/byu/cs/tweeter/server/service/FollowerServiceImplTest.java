@@ -37,8 +37,8 @@ public class FollowerServiceImplTest {
                 "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/daisy_duck.png");
 
         // Setup request objects to use in the tests
-        validRequest = new FollowerRequest(currentUser, 3, null);
-        invalidRequest = new FollowerRequest(null, 0, null);
+//        validRequest = new FollowerRequest(currentUser, 3, null);
+//        invalidRequest = new FollowerRequest(null, 0, null);
 
         // Setup a mock ServerFacade that will return known responses
         successResponse = new FollowerResponse(Arrays.asList(resultUser1, resultUser2, resultUser3), false);

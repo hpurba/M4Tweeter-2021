@@ -7,7 +7,6 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
@@ -38,14 +37,12 @@ public class RegisterServiceImplTest {
         User user = new User(firstName, lastName, alias,
                 "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
 
-        AuthToken authToken = new AuthToken();
-
         // Requests (Valid and Invalid)
-        validRequest = new RegisterRequest(firstName, lastName, alias, password, byteArray);
+//        validRequest = new RegisterRequest(firstName, lastName, alias, password, byteArray);
         invalidRequest = new RegisterRequest(null, null, null, null, null);
 
         // Setup a mock ServerFacade that will return known responses
-        successResponse = new RegisterResponse(user, authToken); // success is true and message is null
+//        successResponse = new RegisterResponse(user, authToken); // success is true and message is null
         failureResponse = new RegisterResponse(null, null);
 
         // Create a FollowingService instance and wrap it with a spy that will use the mock service

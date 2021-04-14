@@ -49,11 +49,11 @@ public class AuthorizationsDAO {
         Table table = dynamoDB.getTable(TableName);
 
         Item authorizationItem = table.getItem(TokenAttr, token);
-        // Item not found
+        // Item not found, return -1, which can be used later to signal no valid token
         if (authorizationItem == null) {
             return -1;
         }
-
+        // Returns the Creation Time
         return Long.parseLong(authorizationItem.getString(TimestampAttr));
     }
 }

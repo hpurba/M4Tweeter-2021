@@ -7,11 +7,10 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 
-import edu.byu.cs.tweeter.model.domain.AuthToken;
+
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.request.LogoutRequest;
 import edu.byu.cs.tweeter.model.service.response.LogoutResponse;
-import edu.byu.cs.tweeter.server.dao.LogoutDAO;
 
 public class LogoutServiceImplTest {
     private LogoutRequest validRequest;
@@ -37,11 +36,10 @@ public class LogoutServiceImplTest {
                 "https://faculty.cs.byu.edu/~jwilkerson/cs340/tweeter/images/donald_duck.png");
 
         String AUTH_TOKEN_KEY = "AuthTokenKey";
-        AuthToken authToken = new AuthToken();
 
         // Requests (Valid and Invalid)
-        validRequest = new LogoutRequest(username);
-        invalidRequest = new LogoutRequest(null);
+//        validRequest = new LogoutRequest(username);
+//        invalidRequest = new LogoutRequest(null);
 
         // Setup a mock ServerFacade that will return known responses
         successResponse = new LogoutResponse(true); // success is true and message is null
@@ -54,7 +52,7 @@ public class LogoutServiceImplTest {
 
     /**
      * Verify that for successful requests the {@link LogoutServiceImpl #logout(LogoutRequest)}
-     * method returns the same result as the {@link LogoutDAO}.
+     * method returns the same result as the {@link }.
      * .
      *
      * @throws IOException if an IO error occurs.
@@ -68,7 +66,7 @@ public class LogoutServiceImplTest {
 
     /**
      * Verify that for failed requests the {@link LogoutServiceImpl #logout(LogoutRequest)}
-     * method returns the same result as the {@link LogoutDAO}.
+     * method returns the same result as the {@link }.
      *
      * @throws IOException if an IO error occurs.
      */

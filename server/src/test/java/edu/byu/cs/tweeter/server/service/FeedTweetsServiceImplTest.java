@@ -28,17 +28,17 @@ public class FeedTweetsServiceImplTest {
      */
     @BeforeEach
     public void setup() throws IOException {
-        Tweet currentTweet = new Tweet("@TestUser", "The greatest glory in living lies not in never falling, but in rising every time we fall.", "userName");
-        Tweet resultTweet1 = new Tweet("@TestUser", "The way to get started is to quit talking and begin doing.", "userName");
-        Tweet resultTweet2 = new Tweet("@TestUser", "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.", "userName");
-        Tweet resultTweet3 = new Tweet("@TestUser", "If life were predictable it would cease to be life, and be without flavor.", "userName");
+//        Tweet currentTweet = new Tweet("@TestUser", "The greatest glory in living lies not in never falling, but in rising every time we fall.", "userName");
+//        Tweet resultTweet1 = new Tweet("@TestUser", "The way to get started is to quit talking and begin doing.", "userName");
+//        Tweet resultTweet2 = new Tweet("@TestUser", "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.", "userName");
+//        Tweet resultTweet3 = new Tweet("@TestUser", "If life were predictable it would cease to be life, and be without flavor.", "userName");
 
 
         // Requests (Valid and Invalid)
-        validRequest = new FeedTweetsRequest(currentTweet, 3, null);
-        invalidRequest = new FeedTweetsRequest(null, 0, null);
+//        validRequest = new FeedTweetsRequest(currentTweet, 3, null);
+//        invalidRequest = new FeedTweetsRequest(null, 0, null);
 
-        successResponse = new FeedTweetsResponse(Arrays.asList(resultTweet1, resultTweet2, resultTweet3), false);
+//        successResponse = new FeedTweetsResponse(Arrays.asList(resultTweet1, resultTweet2, resultTweet3), false);
         failureResponse = new FeedTweetsResponse("An exception occurred");
 
         // Create a FeedTweetsService instance and wrap it with a spy that will use the mock service
