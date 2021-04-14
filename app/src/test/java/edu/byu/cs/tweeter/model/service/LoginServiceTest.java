@@ -7,7 +7,6 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.net.TweeterRemoteException;
 import edu.byu.cs.tweeter.model.service.request.LoginRequest;
@@ -44,14 +43,14 @@ class LoginServiceTest {
         String password = "password";
 
         String AUTH_TOKEN_KEY = "AuthTokenKey";
-        AuthToken authToken = new AuthToken();
+//        AuthToken authToken = new AuthToken();
 
         // Requests (Valid and Invalid)
         validRequest = new LoginRequest(username, password);
         invalidRequest = new LoginRequest(null, null);
 
         // Setup a mock ServerFacade that will return known responses
-        successResponse = new LoginResponse(user, new AuthToken());
+//        successResponse = new LoginResponse(user, new AuthToken());
         failureResponse = new LoginResponse("An exception occurred");
 
         loginServiceSpy = Mockito.spy(new LoginService());

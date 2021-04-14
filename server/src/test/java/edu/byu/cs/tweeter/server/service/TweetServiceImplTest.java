@@ -13,7 +13,6 @@ import edu.byu.cs.tweeter.model.service.response.TweetResponse;
 
 public class TweetServiceImplTest {
 
-
     private TweetRequest validRequest;
     private TweetRequest invalidRequest;
 
