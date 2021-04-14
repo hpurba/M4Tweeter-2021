@@ -36,7 +36,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
     private static  String AUTH_TOKEN_KEY;
     private static final int LOADING_DATA_VIEW = 0;
     private static final int ITEM_VIEW = 1;
-    private static final int PAGE_SIZE = 8; // Number of items for each scrolling pagination.
+    private static final int PAGE_SIZE = 9; // Number of items for each scrolling pagination.
 
     private User user;
     private String authToken;

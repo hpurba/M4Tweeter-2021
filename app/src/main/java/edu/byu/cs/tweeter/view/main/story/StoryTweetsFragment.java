@@ -134,7 +134,6 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
          * @param tweet the tweet.
          */
         void bindTweet(Tweet tweet) {
-
             userAlias.setText(tweet.getAlias());
             userFullName.setText(tweet.getUser().getFirstName() + " " + tweet.getUser().getLastName());
             tweetText.setText(tweet.getTweetText());

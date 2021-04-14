@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
     private Toast tweetCompleteToast;
     public User user;
     public ViewGroup root;
+    public byte[] savedImageBytes;
 
     private String firstName;
     private String lastName;
@@ -140,8 +141,9 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         // Sets the logged in user's profile Image
         ImageView userImageView = findViewById(R.id.userImageMain);
         byte [] imageBytes = user.getImageBytes();    // old method
-        if (imageBytes != null) {
+        if(imageBytes != null) {
             setImageViewWithByteArray(userImageView, imageBytes);
+            saveImageBytes(imageBytes);
         }
 
         // Display the Followee Count
@@ -151,6 +153,14 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         // Display the Follower Count
         TextView followerCount = findViewById(R.id.followerCount);
         followerCount.setText(getString(R.string.followerCount, followerNumCount));
+    }
+
+    public void saveImageBytes(byte[] imageBytes) {
+        this.savedImageBytes = imageBytes;
+    }
+
+    public byte[] getSavedImageBytes() {
+        return savedImageBytes;
     }
 
     public String getAuthToken() {
@@ -222,6 +232,8 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
 
     @Override
     public void logoutSuccessful(LogoutResponse logoutResponse) {
+        user = null;
+        AUTH_TOKEN_KEY = null;
         Intent intent = new Intent(this, LoginActivity.class);
         logoutToast.cancel();
         startActivity(intent);
@@ -235,16 +247,25 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
     @Override
     public void tweetSuccessful(TweetResponse tweetResponse) {
         // TODO: Write code to handle this case.
+        String output = "Nice job " + firstName + " " + lastName + "! You just posted a tweet as " + alias + ".\n Your tweet: " + tweetText;
+        tweetCompleteToast = Toast.makeText(this, output, Toast.LENGTH_LONG);
+        tweetCompleteToast.show();
     }
 
     @Override
     public void tweetUnsuccessful(TweetResponse tweetResponse) {
         // TODO: Write code to handle this case.
+        String output = "Uh oh! " + tweetResponse.getMessage();
+        tweetCompleteToast = Toast.makeText(this, output, Toast.LENGTH_LONG);
+        tweetCompleteToast.show();
     }
 
     @Override
     public void handleException(Exception ex) {
         // TODO: Write code to handle this case.
+        String output = "Oh my! " + ex.toString();
+        tweetCompleteToast = Toast.makeText(this, output, Toast.LENGTH_LONG);
+        tweetCompleteToast.show();
     }
 
     /**
@@ -258,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.fragment_tweet, null);
+        View popupView = inflater.inflate(R.layout.fragment_tweet, null);   // root was null
 
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -279,6 +300,12 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
 
         TextView userAlias = popupView.findViewById(R.id.userAliasInTweetWindow);
         userAlias.setText(user.getAlias());
+
+        // Verify that the image bytes are in the user object, if not retrieve it from the url.
+        if (user.getImageBytes() == null) {
+            user.setImageBytes(getSavedImageBytes());
+        }
+
 
         tweetProfilePictureView = popupView.findViewById(R.id.tweetProfilePictureImageView);
         Bitmap userProfilePictureBitmap = BitmapFactory.decodeByteArray(user.getImageBytes(), 0, user.getImageBytes().length);
@@ -318,9 +345,9 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
      * @return
      */
     public Boolean postTweet(String tweetText){
-        String output = "Nice job " + firstName + " " + lastName + "! You just posted a tweet as " + alias + ".\n Your tweet: " + tweetText;
-        tweetCompleteToast = Toast.makeText(this, output, Toast.LENGTH_LONG);
-        tweetCompleteToast.show();
+//        String output = "Nice job " + firstName + " " + lastName + "! You just posted a tweet as " + alias + ".\n Your tweet: " + tweetText;
+//        tweetCompleteToast = Toast.makeText(this, output, Toast.LENGTH_LONG);
+//        tweetCompleteToast.show();
 
         long currentTime = new Timestamp(System.currentTimeMillis()).getTime();
         Tweet tweet = new Tweet(user, tweetText, currentTime);

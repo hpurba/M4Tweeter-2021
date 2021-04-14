@@ -35,7 +35,6 @@ public class TweetTask  extends AsyncTask<TweetRequest, Void, TweetResponse> {
         if(observer == null) {
             throw new NullPointerException();
         }
-
         this.presenter = presenter;
         this.observer = observer;
     }
