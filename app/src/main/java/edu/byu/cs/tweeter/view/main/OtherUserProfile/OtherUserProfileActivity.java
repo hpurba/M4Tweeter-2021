@@ -132,7 +132,7 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
             public void onClick(View view) {
 
                 isFollowing = !isFollowing;
-                FollowingStatusRequest followingStatusRequest = new FollowingStatusRequest(user, otherUserAlias,isFollowing, authToken); // Alias is the @username
+                FollowingStatusRequest followingStatusRequest = new FollowingStatusRequest(user, otherUserAlias, isFollowing, authToken); // Alias is the @username
 //                followingStatusRequest.setFollowerUser(user);
 //                followingStatusRequest.setFolloweeUser(otherUser);
                 GetOtherUserProfileTask getOtherUserProfileTask = new GetOtherUserProfileTask(presenter, OtherUserProfileActivity.this);
