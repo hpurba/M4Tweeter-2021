@@ -17,6 +17,7 @@ public class GetOtherUserProfileTask  extends AsyncTask<FollowingStatusRequest, 
     private final OtherUserProfilePresenter presenter;
     private final Observer observer;
     private Exception exception;
+    private FollowingStatusResponse response;
 
     /**
      * An observer interface to be implemented by observers who want to be notified when this task
@@ -50,7 +51,6 @@ public class GetOtherUserProfileTask  extends AsyncTask<FollowingStatusRequest, 
      */
     @Override
     protected FollowingStatusResponse doInBackground(FollowingStatusRequest... followingStatusRequests) {
-        FollowingStatusResponse response = null;
         try {
             response = presenter.getFollowingStatus(followingStatusRequests[0]);
         } catch (IOException ex) {

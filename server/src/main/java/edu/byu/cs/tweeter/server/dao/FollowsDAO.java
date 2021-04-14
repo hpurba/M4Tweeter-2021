@@ -61,7 +61,7 @@ public class FollowsDAO {
                 .withString(FolloweeProfileImageURLAttr, otherUser.getImageUrl());
         table.putItem(item);
 
-        return new FollowingStatusResponse(request.getUser(), true);
+        return new FollowingStatusResponse(otherUser, true);
     }
 
     /**
@@ -72,7 +72,7 @@ public class FollowsDAO {
     public FollowingStatusResponse changeToUnFollow(FollowingStatusRequest request, User otherUser) {
         Table table = dynamoDB.getTable(TableName);
         table.deleteItem(FollowerAliasAttribute, request.getUser().getAlias(), FolloweeAliasAttribute, otherUser.getAlias());
-        return new FollowingStatusResponse(request.getUser(), true);
+        return new FollowingStatusResponse(otherUser, true);
     }
 
     /**
@@ -182,12 +182,12 @@ public class FollowsDAO {
     public FollowingStatusResponse checkFollow(FollowingStatusRequest request, User otherUser) {
         Table table = dynamoDB.getTable(TableName);
 
-        boolean follows = false;
+        boolean doesFollow = false;
         Item item = table.getItem(FollowerAliasAttribute, otherUser.getAlias(), FolloweeAliasAttribute, request.getUser().getAlias());
         if (item != null) {
-            follows = true;
+            doesFollow = true;
         }
-        return new FollowingStatusResponse(otherUser, follows);
+        return new FollowingStatusResponse(otherUser, doesFollow);
     }
 }
 

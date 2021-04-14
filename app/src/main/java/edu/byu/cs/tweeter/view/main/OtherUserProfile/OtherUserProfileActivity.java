@@ -34,11 +34,11 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
 
     private OtherUserProfilePresenter presenter;
     private FollowerPresenter followerPresenter;
-    public static final String CURRENT_USER_KEY = "CurrentUser";
-    public static final String OTHER_USER_KEY = "OtherUser";
-    public static final String AUTH_TOKEN_KEY = "AuthTokenKey";
-    public static final String OTHER_USER_ALIAS_KEY = "OtherUserAlias";
-    public static final String OTHER_USER_FULL_NAME = "OtherUserFullName";
+    public static String CURRENT_USER_KEY = "CurrentUser";
+    public static String OTHER_USER_KEY = "OtherUser";
+    public static String AUTH_TOKEN_KEY = "AuthTokenKey";
+    public static String OTHER_USER_ALIAS_KEY = "OtherUserAlias";
+    public static String OTHER_USER_FULL_NAME = "OtherUserFullName";
 
     private static final int PAGE_SIZE = 10;
 
@@ -70,18 +70,11 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
         user = (User) getIntent().getSerializableExtra(CURRENT_USER_KEY);
         authToken = getIntent().getStringExtra(AUTH_TOKEN_KEY);
         otherUserAlias = getIntent().getStringExtra(OTHER_USER_ALIAS_KEY);
-        // Get the other user
-//        otherUser = (User) getIntent().getSerializableExtra(OTHER_USER_KEY);
-//        GetOtherUserProfileTask getOtherUserProfileTask = new GetOtherUserProfileTask(presenter, OtherUserProfileActivity.this);
-//        FollowingStatusRequest followingStatusRequest = new FollowingStatusRequest(otherUserAlias);
-//        getOtherUserProfileTask.execute(followingStatusRequest);
-//        otherUserFullName = user.getAlias();
-//        otherUser.setAlias(otherUserFullName);
 
 
-
-//        String authToken = "MadeUpAuthTokenFromOtherUserProfileActivity";
+        otherUser = new User(otherUserFullName, otherUserFullName, otherUserAlias, user.getImageUrl());
         OtherUserSectionsPagerAdapter sectionsPagerAdapter = new OtherUserSectionsPagerAdapter(this, getSupportFragmentManager(), user, otherUser, authToken);
+//        OtherUserSectionsPagerAdapter sectionsPagerAdapter = new OtherUserSectionsPagerAdapter(this, getSupportFragmentManager(), user, otherUser, authToken);
         myViewPager = (ViewPager) findViewById(R.id.otherUser_view_pager);
         tabLayout = (TabLayout) findViewById(R.id.otherUser_tabs);
         myViewPager.setAdapter(sectionsPagerAdapter);

@@ -37,11 +37,11 @@ public class OtherUserSectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new StoryTweetsFragment().newInstance(user, authToken); // STORY
+                return new StoryTweetsFragment().newInstance(otherUser, authToken); // STORY
             case 1:
-                return FollowingFragment.newInstance(user, otherUser, authToken);
+                return FollowingFragment.newInstance(otherUser, otherUser, authToken);
             case 2:
-                return FollowersFragment.newInstance(user,otherUser, authToken);
+                return FollowersFragment.newInstance(otherUser, otherUser, authToken);
             default:
                 return null;
         }

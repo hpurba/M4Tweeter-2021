@@ -184,8 +184,8 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
                         // Move this to when success on getting other user.
                         Intent intent = new Intent(context, OtherUserProfileActivity.class);
                         intent.putExtra(OtherUserProfileActivity.CURRENT_USER_KEY, user);
-                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_ALIAS_KEY, userAlias.getText().toString());
                         intent.putExtra(OtherUserProfileActivity.AUTH_TOKEN_KEY, authToken);
+                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_ALIAS_KEY, userAlias.getText().toString());
                         intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, userName.getText().toString());
                         context.startActivity(intent);
                     }
