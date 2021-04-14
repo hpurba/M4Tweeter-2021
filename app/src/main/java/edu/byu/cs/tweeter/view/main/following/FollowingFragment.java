@@ -24,16 +24,24 @@ import java.util.List;
 
 import edu.byu.cs.tweeter.R;
 import edu.byu.cs.tweeter.model.domain.User;
+import edu.byu.cs.tweeter.model.service.request.GetUserRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowingResponse;
+import edu.byu.cs.tweeter.model.service.response.FollowingStatusResponse;
+import edu.byu.cs.tweeter.model.service.response.GetUserResponse;
 import edu.byu.cs.tweeter.presenter.FollowingPresenter;
+import edu.byu.cs.tweeter.presenter.GetOtherUserPresenter;
+import edu.byu.cs.tweeter.presenter.OtherUserProfilePresenter;
 import edu.byu.cs.tweeter.view.asyncTasks.GetFollowingTask;
+import edu.byu.cs.tweeter.view.asyncTasks.GetOtherUserProfileTask;
+import edu.byu.cs.tweeter.view.asyncTasks.GetOtherUserTask;
+import edu.byu.cs.tweeter.view.main.MainActivity;
 import edu.byu.cs.tweeter.view.main.OtherUserProfile.OtherUserProfileActivity;
 import edu.byu.cs.tweeter.view.util.ImageUtils;
 
 /**
  * The fragment that displays on the 'Following' tab.
  */
-public class FollowingFragment extends Fragment implements FollowingPresenter.View {
+public class FollowingFragment extends Fragment implements FollowingPresenter.View, GetOtherUserPresenter.View, OtherUserProfilePresenter.View, GetFollowingTask.Observer, GetOtherUserProfileTask.Observer {
 
     private static final String LOG_TAG = "FollowingFragment";
     public static final String CURRENT_USER_KEY = "CurrentUser";
@@ -118,10 +126,25 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
         return authToken;
     }
 
+    @Override
+    public void followeesRetrieved(FollowingResponse followingResponse) {
+
+    }
+
+    @Override
+    public void followingRetrieved(FollowingStatusResponse followingStatusResponse) {
+
+    }
+
+    @Override
+    public void handleException(Exception exception) {
+
+    }
+
     /**
      * The ViewHolder for the RecyclerView that displays the Following data.
      */
-    private class FollowingHolder extends RecyclerView.ViewHolder {
+    private class FollowingHolder extends RecyclerView.ViewHolder implements GetOtherUserProfileTask.Observer {
 
         private final ImageView userImage;
         private final TextView userAlias;
@@ -146,11 +169,22 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
                     public void onClick(View view) {
                         Toast.makeText(getContext(), "You selected '" + userName.getText() + "'.", Toast.LENGTH_SHORT).show();
 
-//                        GetOtherUserProfileTask getOtherUserProfileTask = new GetOtherUserProfileTask(presenter, FollowingHolder.this);
+                        // Don't do this...
+//                        GetOtherUserTask getOtherUserTask = new GetOtherUserTask(presenter, FollowingFragment.this);
+//                        GetUserRequest getUserRequest = new GetUserRequest(userAlias.getText().toString(), authToken);
+//                        getOtherUserTask.execute(getUserRequest);
 
+
+                        // Do something more like this...
+//                        GetOtherUserProfileTask getOtherUserProfileTask = new GetOtherUserProfileTask(presenter, FollowingFragment.this); // FollowingFragment.this or FollowingHolder.this
+                        // Confused because in GetOther...Task the presenter required would have to be followingFragment or followerFragment.
+                        // presenter says it wants to be: OtherUserProfilePresenter
+
+
+                        // Move this to when success on getting other user.
                         Intent intent = new Intent(context, OtherUserProfileActivity.class);
                         intent.putExtra(OtherUserProfileActivity.CURRENT_USER_KEY, user);
-                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_KEY, otherUser);
+                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_ALIAS_KEY, userAlias.getText().toString());
                         intent.putExtra(OtherUserProfileActivity.AUTH_TOKEN_KEY, authToken);
                         intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, userName.getText().toString());
                         context.startActivity(intent);
@@ -172,6 +206,16 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
             userImage.setImageDrawable(ImageUtils.drawableFromByteArray(user.getImageBytes()));
             userAlias.setText(user.getAlias());
             userName.setText(user.getName());
+        }
+
+        @Override
+        public void followingRetrieved(FollowingStatusResponse followingStatusResponse) {
+            otherUser = followingStatusResponse.getUser();
+        }
+
+        @Override
+        public void handleException(Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

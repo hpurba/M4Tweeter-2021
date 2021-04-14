@@ -1,8 +1,10 @@
 package edu.byu.cs.tweeter.model.service.response;
 
+import edu.byu.cs.tweeter.model.domain.User;
+
 public class FollowingStatusResponse extends Response {
 
-    private String user;
+    private User user;
     private Boolean following; // isFollowing;
 
     /**
@@ -20,7 +22,7 @@ public class FollowingStatusResponse extends Response {
      * @param user
      * @param isFollowing
      */
-    public FollowingStatusResponse(String user, Boolean isFollowing) {
+    public FollowingStatusResponse(User user, Boolean isFollowing) {
         super(true, null);
         this.user = user;
         this.following = isFollowing;
@@ -31,7 +33,7 @@ public class FollowingStatusResponse extends Response {
      *
      * @return the user.
      */
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -39,11 +41,7 @@ public class FollowingStatusResponse extends Response {
         return following;
     }
 
-    public void updateUser(String user) {
-        this.user = user;
-    }
-
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

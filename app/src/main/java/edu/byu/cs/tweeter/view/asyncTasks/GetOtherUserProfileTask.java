@@ -9,6 +9,7 @@ import edu.byu.cs.tweeter.model.service.response.FollowingStatusResponse;
 import edu.byu.cs.tweeter.presenter.FollowerPresenter;
 import edu.byu.cs.tweeter.presenter.OtherUserProfilePresenter;
 import edu.byu.cs.tweeter.view.main.follower.FollowersFragment;
+import edu.byu.cs.tweeter.view.main.following.FollowingFragment;
 
 public class GetOtherUserProfileTask  extends AsyncTask<FollowingStatusRequest, Void, FollowingStatusResponse> {
 
@@ -36,7 +37,6 @@ public class GetOtherUserProfileTask  extends AsyncTask<FollowingStatusRequest, 
         if(observer == null) {
             throw new NullPointerException();
         }
-
         this.presenter = presenter;
         this.observer = observer;
     }
@@ -50,15 +50,12 @@ public class GetOtherUserProfileTask  extends AsyncTask<FollowingStatusRequest, 
      */
     @Override
     protected FollowingStatusResponse doInBackground(FollowingStatusRequest... followingStatusRequests) {
-
         FollowingStatusResponse response = null;
-
         try {
             response = presenter.getFollowingStatus(followingStatusRequests[0]);
         } catch (IOException ex) {
             exception = ex;
         }
-
         return response;
     }
 
@@ -74,10 +71,5 @@ public class GetOtherUserProfileTask  extends AsyncTask<FollowingStatusRequest, 
         } else {
             observer.followingRetrieved(followingStatusResponse);
         }
-
-//        observer.followingRetrieved(followingStatusResponse);
-
     }
-
-
 }

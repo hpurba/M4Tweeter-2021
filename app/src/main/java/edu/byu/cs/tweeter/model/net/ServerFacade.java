@@ -6,6 +6,7 @@ import edu.byu.cs.tweeter.model.service.request.FeedTweetsRequest;
 import edu.byu.cs.tweeter.model.service.request.FollowerRequest;
 import edu.byu.cs.tweeter.model.service.request.FollowingRequest;
 import edu.byu.cs.tweeter.model.service.request.FollowingStatusRequest;
+import edu.byu.cs.tweeter.model.service.request.GetUserRequest;
 import edu.byu.cs.tweeter.model.service.request.LoginRequest;
 import edu.byu.cs.tweeter.model.service.request.LogoutRequest;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
@@ -15,6 +16,7 @@ import edu.byu.cs.tweeter.model.service.response.FeedTweetsResponse;
 import edu.byu.cs.tweeter.model.service.response.FollowerResponse;
 import edu.byu.cs.tweeter.model.service.response.FollowingResponse;
 import edu.byu.cs.tweeter.model.service.response.FollowingStatusResponse;
+import edu.byu.cs.tweeter.model.service.response.GetUserResponse;
 import edu.byu.cs.tweeter.model.service.response.LoginResponse;
 import edu.byu.cs.tweeter.model.service.response.LogoutResponse;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
@@ -249,6 +251,24 @@ public class ServerFacade {
      */
     public FollowingStatusResponse changeToUnFollow(FollowingStatusRequest request, String urlPath) throws IOException, TweeterRemoteException {
         FollowingStatusResponse response = clientCommunicator.doPost(urlPath, request, null, FollowingStatusResponse.class);
+
+        if(response.isSuccess()) {
+            return response;
+        } else {
+            throw new RuntimeException(response.getMessage());
+        }
+    }
+
+    /**
+     * Grabs another user (other than the current one)
+     * @param request
+     * @param urlPath
+     * @return
+     * @throws IOException
+     * @throws TweeterRemoteException
+     */
+    public GetUserResponse getOtherUser(GetUserRequest request, String urlPath) throws IOException, TweeterRemoteException {
+        GetUserResponse response = clientCommunicator.doPost(urlPath, request, null, GetUserResponse.class);
 
         if(response.isSuccess()) {
             return response;

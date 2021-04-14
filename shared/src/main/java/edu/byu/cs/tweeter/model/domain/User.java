@@ -30,13 +30,6 @@ public class User implements Comparable<User>, Serializable {
         this.imageUrl = imageURL;
     }
 
-    // Uses imageBytes
-//    public User(String firstName, String lastName, byte[] imageBytes, String alias ) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.imageBytes = imageBytes;
-//        this.alias = alias;
-//    }
     public User(String firstName, String lastName, byte[] imageBytes, String alias ) {
         this.firstName = firstName;
         this.lastName = lastName;

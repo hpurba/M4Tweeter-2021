@@ -37,12 +37,14 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
     public static final String CURRENT_USER_KEY = "CurrentUser";
     public static final String OTHER_USER_KEY = "OtherUser";
     public static final String AUTH_TOKEN_KEY = "AuthTokenKey";
+    public static final String OTHER_USER_ALIAS_KEY = "OtherUserAlias";
     public static final String OTHER_USER_FULL_NAME = "OtherUserFullName";
 
     private static final int PAGE_SIZE = 10;
 
     public User user;
     public User otherUser;
+    String otherUserAlias;
     public String otherUserFullName;
     public Boolean isFollowing = true;
     public Button followUnFollowButton;
@@ -66,8 +68,16 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
 
         // Get the User and passed on authtoken
         user = (User) getIntent().getSerializableExtra(CURRENT_USER_KEY);
-        otherUser = (User) getIntent().getSerializableExtra(OTHER_USER_KEY);
         authToken = getIntent().getStringExtra(AUTH_TOKEN_KEY);
+        otherUserAlias = getIntent().getStringExtra(OTHER_USER_ALIAS_KEY);
+        // Get the other user
+//        otherUser = (User) getIntent().getSerializableExtra(OTHER_USER_KEY);
+//        GetOtherUserProfileTask getOtherUserProfileTask = new GetOtherUserProfileTask(presenter, OtherUserProfileActivity.this);
+//        FollowingStatusRequest followingStatusRequest = new FollowingStatusRequest(user.getAlias());
+//        getOtherUserProfileTask.execute(followingStatusRequest);
+//        otherUserFullName = user.getAlias();
+//        otherUser.setAlias(otherUserFullName);
+
 
 //        String authToken = "MadeUpAuthTokenFromOtherUserProfileActivity";
         OtherUserSectionsPagerAdapter sectionsPagerAdapter = new OtherUserSectionsPagerAdapter(this, getSupportFragmentManager(), user, otherUser, authToken);
@@ -82,7 +92,7 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
         otherUserFullName = (String) getIntent().getSerializableExtra(OTHER_USER_FULL_NAME);
 
         // Sets the top activity bar to be the name of the selected user's alias
-        getSupportActionBar().setTitle(otherUser.getAlias());  // provide compatibility to all the versions
+        getSupportActionBar().setTitle(otherUserAlias);  // provide compatibility to all the versions
 
         // the OtherUser's name
         TextView userFullName = findViewById(R.id.otherUsersFullName);
@@ -96,10 +106,11 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
         userFullName.setText(otherUserFullName);
         // the OtherUser's alias
         TextView userAlias = findViewById(R.id.otherUsersAlias);
-        userAlias.setText(otherUser.getAlias());
+        userAlias.setText(otherUserAlias);
 
         // Set the user profile Image using image bytes
         ImageView userImageView = findViewById(R.id.otherUserProfilePicture);
+        // Need to fetch the otherUser to get the image bytes.
         byte [] imageBytes = user.getImageBytes();
         if (imageBytes != null){
             setImageViewWithByteArray(userImageView, imageBytes);

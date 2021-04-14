@@ -7,8 +7,10 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 
 import edu.byu.cs.tweeter.model.domain.User;
+import edu.byu.cs.tweeter.model.service.request.GetUserRequest;
 import edu.byu.cs.tweeter.model.service.request.LoginRequest;
 import edu.byu.cs.tweeter.model.service.request.RegisterRequest;
+import edu.byu.cs.tweeter.model.service.response.GetUserResponse;
 import edu.byu.cs.tweeter.model.service.response.LoginResponse;
 import edu.byu.cs.tweeter.model.service.response.RegisterResponse;
 
@@ -107,5 +109,24 @@ public class UsersDAO {
     public void deleteUser(User user) {
         Table table = dynamoDB.getTable(TableName);
         table.deleteItem(UsernameAttribute, user.getAlias());
+    }
+
+
+
+    public GetUserResponse getOtherUser(GetUserRequest request) {
+        Table table = dynamoDB.getTable(TableName);
+
+        Item item = table.getItem(UsernameAttribute, request.getAlias());
+
+        if (item == null) {
+            return new GetUserResponse("Could not find user from request");
+        }
+
+        String alias = item.getString(UsernameAttribute);
+        String firstName = item.getString(FirstNameAttribute);
+        String lastName = item.getString(LastNameAttribute);
+        String image_url = item.getString(ProfileImageURLAttribute);
+
+        return new GetUserResponse(new User(firstName, lastName, alias, image_url));
     }
 }
