@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import edu.byu.cs.tweeter.R;
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.view.main.follower.FollowersFragment;
 import edu.byu.cs.tweeter.view.main.following.FollowingFragment;
@@ -22,12 +21,14 @@ public class OtherUserSectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int[] TAB_TITLES = new int[]{R.string.storyTabTitle, R.string.followingTabTitle, R.string.followersTabTitle};
     private final Context mContext;
     private final User user;
+    private final User otherUser;
     private final String authToken;
 
-    public OtherUserSectionsPagerAdapter(Context context, FragmentManager fm, User user, String authToken) {
+    public OtherUserSectionsPagerAdapter(Context context, FragmentManager fm, User user, User otherUser, String authToken) {
         super(fm);
         mContext = context;
         this.user = user;
+        this.otherUser = otherUser;
         this.authToken = authToken;
     }
 
@@ -36,9 +37,9 @@ public class OtherUserSectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new  StoryTweetsFragment().newInstance(user, authToken); // STORY
+                return new StoryTweetsFragment().newInstance(user, authToken); // STORY
             case 1:
-                return FollowingFragment.newInstance(user, authToken);
+                return FollowingFragment.newInstance(user, otherUser, authToken);
             case 2:
                 return FollowersFragment.newInstance(user,authToken);
             default:

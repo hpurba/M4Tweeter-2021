@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.byu.cs.tweeter.R;
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
-import edu.byu.cs.tweeter.model.service.request.FollowerRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowerResponse;
 import edu.byu.cs.tweeter.model.service.response.FollowingStatusResponse;
 import edu.byu.cs.tweeter.presenter.FollowerPresenter;
@@ -166,11 +164,10 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
                     public void onClick(View view) {
                         Toast.makeText(getContext(), "You selected '" + userName.getText() + "'.", Toast.LENGTH_SHORT).show();
 
-
                         Intent intent = new Intent(context, OtherUserProfileActivity.class);
                         intent.putExtra(OtherUserProfileActivity.CURRENT_USER_KEY, user);
                         intent.putExtra(OtherUserProfileActivity.AUTH_TOKEN_KEY, authToken);
-                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_ALIAS, userAlias.getText().toString());
+                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_KEY, userAlias.getText().toString());   // otherUser
                         intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, userName.getText().toString());
 
                         context.startActivity(intent);
@@ -203,7 +200,6 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
         private final List<User> users = new ArrayList<>();
 
 //        private User lastFollower;
-
 
         private boolean hasMorePages;
         private boolean isLoading = false;

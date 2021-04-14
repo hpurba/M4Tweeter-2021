@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.byu.cs.tweeter.R;
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
-import edu.byu.cs.tweeter.model.service.request.FollowingRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowingResponse;
 import edu.byu.cs.tweeter.presenter.FollowingPresenter;
 import edu.byu.cs.tweeter.view.asyncTasks.GetFollowingTask;
@@ -38,8 +36,9 @@ import edu.byu.cs.tweeter.view.util.ImageUtils;
 public class FollowingFragment extends Fragment implements FollowingPresenter.View {
 
     private static final String LOG_TAG = "FollowingFragment";
-    private static final String USER_KEY = "UserKey";
-    private static final String AUTH_TOKEN_KEY = "AuthTokenKey";
+    public static final String CURRENT_USER_KEY = "CurrentUser";
+    public static final String OTHER_USER_KEY = "OtherUser";
+    public static final String AUTH_TOKEN_KEY = "AuthTokenKey";
 
     private static final int LOADING_DATA_VIEW = 0;
     private static final int ITEM_VIEW = 1;
@@ -47,7 +46,8 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
     private static final int PAGE_SIZE = 9;
 
     private User user;
-    private AuthToken authToken;
+    private User otherUser;
+    private String authToken;
     private FollowingPresenter presenter;
     private User lastFollowee;
 
@@ -61,11 +61,12 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
      * @param authToken the auth token for this user's session.
      * @return the fragment.
      */
-    public static FollowingFragment newInstance(User user, String authToken) {
+    public static FollowingFragment newInstance(User user, User otherUser, String authToken) {
         FollowingFragment fragment = new FollowingFragment();
 
-        Bundle args = new Bundle(2);
-        args.putSerializable(USER_KEY, user);
+        Bundle args = new Bundle(3);
+        args.putSerializable(CURRENT_USER_KEY, user);
+        args.putSerializable(OTHER_USER_KEY, otherUser);
         args.putSerializable(AUTH_TOKEN_KEY, authToken);
 
         fragment.setArguments(args);
@@ -78,8 +79,9 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
         View view = inflater.inflate(R.layout.fragment_following, container, false);
 
         //noinspection ConstantConditions
-        user = (User) getArguments().getSerializable(USER_KEY);
-//        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
+        user = (User) getArguments().getSerializable(CURRENT_USER_KEY); // USER_KEY
+        otherUser = (User) getArguments().getSerializable(OTHER_USER_KEY);
+        authToken = getArguments().getString(AUTH_TOKEN_KEY);
 
         presenter = new FollowingPresenter(this);
 
@@ -111,6 +113,11 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
         return lastFollowee;
     }
 
+    @Override
+    public String getAuthToken() {
+        return authToken;
+    }
+
     /**
      * The ViewHolder for the RecyclerView that displays the Following data.
      */
@@ -139,10 +146,12 @@ public class FollowingFragment extends Fragment implements FollowingPresenter.Vi
                     public void onClick(View view) {
                         Toast.makeText(getContext(), "You selected '" + userName.getText() + "'.", Toast.LENGTH_SHORT).show();
 
+//                        GetOtherUserProfileTask getOtherUserProfileTask = new GetOtherUserProfileTask(presenter, FollowingHolder.this);
+
                         Intent intent = new Intent(context, OtherUserProfileActivity.class);
                         intent.putExtra(OtherUserProfileActivity.CURRENT_USER_KEY, user);
+                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_KEY, otherUser);
                         intent.putExtra(OtherUserProfileActivity.AUTH_TOKEN_KEY, authToken);
-                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_ALIAS, userAlias.getText().toString());
                         intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, userName.getText().toString());
                         context.startActivity(intent);
                     }

@@ -18,9 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.List;
 
 import edu.byu.cs.tweeter.R;
-import edu.byu.cs.tweeter.model.domain.AuthToken;
 import edu.byu.cs.tweeter.model.domain.User;
-import edu.byu.cs.tweeter.model.service.request.FollowingRequest;
 import edu.byu.cs.tweeter.model.service.request.FollowingStatusRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowerResponse;
 import edu.byu.cs.tweeter.model.service.response.FollowingStatusResponse;
@@ -28,7 +26,6 @@ import edu.byu.cs.tweeter.presenter.FollowerPresenter;
 import edu.byu.cs.tweeter.presenter.FollowingPresenter;
 import edu.byu.cs.tweeter.presenter.OtherUserProfilePresenter;
 import edu.byu.cs.tweeter.view.asyncTasks.GetFollowersTask;
-import edu.byu.cs.tweeter.view.asyncTasks.GetFollowingTask;
 import edu.byu.cs.tweeter.view.asyncTasks.GetOtherUserProfileTask;
 
 import static edu.byu.cs.tweeter.view.main.MainActivity.setImageViewWithByteArray;
@@ -38,14 +35,14 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
     private OtherUserProfilePresenter presenter;
     private FollowerPresenter followerPresenter;
     public static final String CURRENT_USER_KEY = "CurrentUser";
+    public static final String OTHER_USER_KEY = "OtherUser";
     public static final String AUTH_TOKEN_KEY = "AuthTokenKey";
-    public static final String OTHER_USER_ALIAS = "OtherUserAlias";
     public static final String OTHER_USER_FULL_NAME = "OtherUserFullName";
 
     private static final int PAGE_SIZE = 10;
 
     public User user;
-    public String otherUserAlias;
+    public User otherUser;
     public String otherUserFullName;
     public Boolean isFollowing = true;
     public Button followUnFollowButton;
@@ -53,6 +50,7 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
 
     private User lastFollower;
     private User lastFollowee;
+    private String authToken;
 
     // Tabs and ViewPager
     TabLayout tabLayout;                                    // Button Tabs
@@ -68,10 +66,11 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
 
         // Get the User and passed on authtoken
         user = (User) getIntent().getSerializableExtra(CURRENT_USER_KEY);
-//        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
+        otherUser = (User) getIntent().getSerializableExtra(OTHER_USER_KEY);
+        authToken = getIntent().getStringExtra(AUTH_TOKEN_KEY);
 
-        String authToken = "MadeUpAuthTokenFromOtherUserProfileActivity";
-        OtherUserSectionsPagerAdapter sectionsPagerAdapter = new OtherUserSectionsPagerAdapter(this, getSupportFragmentManager(), user, authToken);
+//        String authToken = "MadeUpAuthTokenFromOtherUserProfileActivity";
+        OtherUserSectionsPagerAdapter sectionsPagerAdapter = new OtherUserSectionsPagerAdapter(this, getSupportFragmentManager(), user, otherUser, authToken);
         myViewPager = (ViewPager) findViewById(R.id.otherUser_view_pager);
         tabLayout = (TabLayout) findViewById(R.id.otherUser_tabs);
         myViewPager.setAdapter(sectionsPagerAdapter);
@@ -79,12 +78,11 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
 
 
         // Get Selected User's information (UserAlias and FullName)
-        otherUserAlias = (String) getIntent().getSerializableExtra(OTHER_USER_ALIAS);
+//        otherUser = (User) getIntent().getSerializableExtra(OTHER_USER_KEY);
         otherUserFullName = (String) getIntent().getSerializableExtra(OTHER_USER_FULL_NAME);
 
-
         // Sets the top activity bar to be the name of the selected user's alias
-        getSupportActionBar().setTitle(otherUserAlias);  // provide compatibility to all the versions
+        getSupportActionBar().setTitle(otherUser.getAlias());  // provide compatibility to all the versions
 
         // the OtherUser's name
         TextView userFullName = findViewById(R.id.otherUsersFullName);
@@ -98,7 +96,7 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
         userFullName.setText(otherUserFullName);
         // the OtherUser's alias
         TextView userAlias = findViewById(R.id.otherUsersAlias);
-        userAlias.setText(otherUserAlias);
+        userAlias.setText(otherUser.getAlias());
 
         // Set the user profile Image using image bytes
         ImageView userImageView = findViewById(R.id.otherUserProfilePicture);
@@ -129,9 +127,9 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
             public void onClick(View view) {
 
                 isFollowing = !isFollowing;
-                FollowingStatusRequest followingStatusRequest = new FollowingStatusRequest(user, isFollowing); // Alias is the @username
-                followingStatusRequest.setMyUsername("otherUsername");
-                followingStatusRequest.setMyUsername(user.getAlias());
+                FollowingStatusRequest followingStatusRequest = new FollowingStatusRequest(otherUser, user, isFollowing); // Alias is the @username
+//                followingStatusRequest.setFollowerUser(user);
+//                followingStatusRequest.setFolloweeUser(otherUser);
                 GetOtherUserProfileTask getOtherUserProfileTask = new GetOtherUserProfileTask(presenter, OtherUserProfileActivity.this);
                 getOtherUserProfileTask.execute(followingStatusRequest);
 
@@ -229,6 +227,11 @@ public class OtherUserProfileActivity extends AppCompatActivity implements Other
     @Override
     public User getLastFollowee() {
         return lastFollowee;
+    }
+
+    @Override
+    public String getAuthToken() {
+        return authToken;
     }
 
     @Override

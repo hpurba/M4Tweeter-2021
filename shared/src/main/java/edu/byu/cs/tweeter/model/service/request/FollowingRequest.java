@@ -13,6 +13,8 @@ public class FollowingRequest {
     private User lastFollowee;
     private String authToken;
 
+    public FollowingRequest() { }
+
     /**
      * Creates an instance.
      *
@@ -22,13 +24,11 @@ public class FollowingRequest {
      *                     there was no previous request or if no followees were returned in the
      *                     previous request).
      */
-    public FollowingRequest(User follower, int limit, User lastFollowee) {
+    public FollowingRequest(User follower, int limit, User lastFollowee, String authToken) {
         this.follower = follower;
         this.limit = limit;
         this.lastFollowee = lastFollowee;
-    }
-
-    public FollowingRequest() {
+        this.authToken = authToken;
     }
 
     /**
@@ -79,3 +79,119 @@ public class FollowingRequest {
         this.authToken = authToken;
     }
 }
+
+
+// TODO: This can be used to test the lambda/API Gateway
+/*
+
+{
+    "follower": {
+        "firstname": "Hikaru",
+        "lastname": "Purba",
+        "alias": "@hpurba",
+        "imageUrl": "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/@hpurba.png",
+        "imageBytes": null
+    },
+    "limit": 9,
+    "lastFollowee": null,
+    "authToken": "14ff3b9a-2563-4620-b9c9-35a7d5c72cb8"
+}
+
+ */
+
+
+/*
+// RESPONSE
+{
+  "success": true,
+  "hasMorePages": false,
+  "followees": [
+    {
+      "firstName": "Rei",
+      "lastName": "Purba",
+      "alias": "@reipurba",
+      "imageUrl": "https://tweeteruserprofileimages.s3-us-west-2.amazonaws.com/%40reipurba.png",
+      "followersCount": 0,
+      "followingCount": 0,
+      "name": "Rei Purba"
+    }
+  ]
+}
+
+
+
+
+ */
+
+
+
+
+// TODO: THIS is the Model Schema
+
+/*
+
+{
+  "title": "FollowingRequest",
+  "type": "object",
+  "properties": {
+    "follower": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+        "type": "string",
+        "description": "The User's firstname"
+        },
+        "lastname": {
+        "type": "string",
+        "description": "The User's lastname"
+        },
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "imageUrl": {
+        "type": "string",
+        "description": "The User's image as a url"
+        },
+        "imageBytes": {
+        "type": "string",
+        "description": "The User's image in a byteArray"
+        }
+      }
+    },
+    "limit": {
+      "type": "number"
+    },
+    "lastFollowee": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+        "type": "string",
+        "description": "The User's firstname"
+        },
+        "lastname": {
+        "type": "string",
+        "description": "The User's lastname"
+        },
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "imageUrl": {
+        "type": "string",
+        "description": "The User's image as a url"
+        },
+        "imageBytes": {
+        "type": "string",
+        "description": "The User's image in a byteArray"
+        }
+      }
+    },
+    "authToken": {
+      "type": "string",
+      "description": "the logged in user's authtoken"
+    }
+  }
+}
+
+ */

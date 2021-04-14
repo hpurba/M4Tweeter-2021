@@ -26,6 +26,7 @@ public class FollowingPresenter {
         User getUser();
         int getPageSize();
         User getLastFollowee();
+        String getAuthToken();
     }
 
     /**
@@ -42,7 +43,8 @@ public class FollowingPresenter {
      * @throws IOException
      */
     public FollowingResponse getFollowing() throws IOException {
-        FollowingRequest request= new FollowingRequest(view.getUser(), view.getPageSize(), view.getLastFollowee());
+//        FollowingRequest request= new FollowingRequest(view.getUser(), view.getPageSize(), view.getLastFollowee());
+        FollowingRequest request= new FollowingRequest(view.getUser(), view.getPageSize(), view.getLastFollowee(), view.getAuthToken());
         FollowingService followingService = getFollowingService();
         return followingService.getFollowees(request);
     }

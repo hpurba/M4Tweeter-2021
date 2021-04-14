@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         }
 //        AuthToken authToken = (AuthToken) getIntent().getSerializableExtra(AUTH_TOKEN_KEY);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), user, getAuthToken());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), user, null, getAuthToken());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -127,10 +127,6 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
             }
         });
 
-
-
-        // TODO: LATER THESE WILL NEED TO RETRIEVE ACTUAL DATA
-        // Sets the User's Full name
         TextView userName = findViewById(R.id.userName);
         userName.setText(user.getName());
 
@@ -178,11 +174,9 @@ public class MainActivity extends AppCompatActivity implements LogoutPresenter.V
         return true;
     }
 
-
     public static void setImageViewWithByteArray(ImageView view, byte[] data) {
         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
         view.setImageBitmap(bitmap);
-//        userImage.setImageDrawable(ImageUtils.drawableFromByteArray(user.getImageBytes()));
     }
 
     public static byte[] fetchRemoteFile(String location) throws Exception {

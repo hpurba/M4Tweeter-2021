@@ -74,3 +74,79 @@ public class FollowerRequest {
         this.authToken = authToken;
     }
 }
+
+
+
+
+// TODO: THIS is the Model Schema
+
+/*
+
+
+{
+  "title": "FollowerRequest",
+  "type": "object",
+  "properties": {
+    "followee": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+        "type": "string",
+        "description": "The User's firstname"
+        },
+        "lastname": {
+        "type": "string",
+        "description": "The User's lastname"
+        },
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "imageUrl": {
+        "type": "string",
+        "description": "The User's image as a url"
+        },
+        "imageBytes": {
+        "type": "string",
+        "description": "The User's image in a byteArray"
+        }
+      }
+    },
+    "limit": {
+      "type": "string"
+    },
+    "lastFollower": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+        "type": "string",
+        "description": "The User's firstname"
+        },
+        "lastname": {
+        "type": "string",
+        "description": "The User's lastname"
+        },
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "imageUrl": {
+        "type": "string",
+        "description": "The User's image as a url"
+        },
+        "imageBytes": {
+        "type": "string",
+        "description": "The User's image in a byteArray"
+        }
+      }
+    },
+    "authToken": {
+      "type": "string",
+      "description": "the logged in user's authtoken"
+    }
+  }
+}
+
+
+
+ */

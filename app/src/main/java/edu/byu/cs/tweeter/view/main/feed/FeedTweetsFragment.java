@@ -149,7 +149,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
                         Intent intent = new Intent(context, OtherUserProfileActivity.class);
                         intent.putExtra(OtherUserProfileActivity.CURRENT_USER_KEY, user);
                         intent.putExtra(OtherUserProfileActivity.AUTH_TOKEN_KEY, authToken);
-                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_ALIAS, userAlias.getText().toString());
+                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_KEY, userAlias.getText().toString());
 //                        intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, userName.getText().toString());
                         intent.putExtra(OtherUserProfileActivity.OTHER_USER_FULL_NAME, user.getFirstName() +  " " + user.getLastName());
 

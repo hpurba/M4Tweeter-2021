@@ -4,9 +4,8 @@ import edu.byu.cs.tweeter.model.domain.User;
 
 public class FollowingStatusRequest {
 
-    private User user;
-    private String myUsername;
-    private String otherPersonUsername;
+    private User followerUser;
+    private User followeeUser;
     private Boolean isFollowing;
     private String authToken;
 
@@ -17,39 +16,34 @@ public class FollowingStatusRequest {
 
     /**
      * Creates an instance.
-     *
-     * @param user
+     * @param followeeUser  User logged in. (unless another user is selected)
+     * @param followerUser
      * @param isFollowing
      */
-    public FollowingStatusRequest(User user, Boolean isFollowing) {
-        this.user = user;
+    public FollowingStatusRequest(User followeeUser, User followerUser, Boolean isFollowing) {
+        this.followeeUser = followeeUser;
+        this.followerUser = followerUser;
         this.isFollowing = isFollowing;
     }
 
-    public User getUser() {
-        return user;
+    public User getFollowerUser() {
+        return followerUser;
     }
-    public String getMyUsername() {
-        return myUsername;
+
+    public void setFollowerUser(User followerUser) {
+        this.followerUser = followerUser;
     }
-    public String getOtherPersonUsername() {
-        return otherPersonUsername;
+
+    public User getFolloweeUser() {
+        return followeeUser;
+    }
+
+    public void setFolloweeUser(User followeeUser) {
+        this.followeeUser = followeeUser;
     }
 
     public Boolean getFollowing() {
         return isFollowing;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setMyUsername(String myUsername) {
-        this.myUsername = myUsername;
-    }
-
-    public void setOtherPersonUsername(String otherPersonUsername) {
-        this.otherPersonUsername = otherPersonUsername;
     }
 
     public void setFollowing(Boolean following) {
@@ -64,3 +58,124 @@ public class FollowingStatusRequest {
         this.authToken = authToken;
     }
 }
+
+
+
+// TODO: THIS IS THE NEW SHCEMA
+/*
+
+{
+  "title": "FollowingStatusRequest",
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+        "type": "string",
+        "description": "The User's firstname"
+        },
+        "lastname": {
+        "type": "string",
+        "description": "The User's lastname"
+        },
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "imageUrl": {
+        "type": "string",
+        "description": "The User's image as a url"
+        },
+        "imageBytes": {
+        "type": "string",
+        "description": "The User's image in a byteArray"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+        "type": "string",
+        "description": "The User's firstname"
+        },
+        "lastname": {
+        "type": "string",
+        "description": "The User's lastname"
+        },
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "imageUrl": {
+        "type": "string",
+        "description": "The User's image as a url"
+        },
+        "imageBytes": {
+        "type": "string",
+        "description": "The User's image in a byteArray"
+        }
+      }
+    },
+    "isFollowing": {
+      "type": "boolean",
+      "description":"Boolean that tells the app if user is following other user or not."
+    },
+    "authToken" : {
+        "type": "string",
+        "description" : "the authToken"
+    }
+  }
+}
+
+
+ */
+
+
+
+// TODO: THIS IS THE OLD SCHEMA
+/*
+
+{
+  "title": "FollowingStatusRequest",
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+        "type": "string",
+        "description": "The User's firstname"
+        },
+        "lastname": {
+        "type": "string",
+        "description": "The User's lastname"
+        },
+        "alias": {
+        "type": "string",
+        "description": "The User's alias"
+        },
+        "imageUrl": {
+        "type": "string",
+        "description": "The User's image as a url"
+        },
+        "imageBytes": {
+        "type": "string",
+        "description": "The User's image in a byteArray"
+        }
+      }
+    },
+    "myUsername": {
+      "type": "string"
+    },
+    "otherPersonUsername": {
+      "type": "string"
+    },
+    "isFollowing": {
+      "type": "boolean"
+    }
+  }
+}
+
+ */

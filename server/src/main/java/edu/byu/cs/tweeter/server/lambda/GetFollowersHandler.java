@@ -23,8 +23,12 @@ public class GetFollowersHandler implements RequestHandler<FollowerRequest, Foll
      */
     @Override
     public FollowerResponse handleRequest(FollowerRequest request, Context context) {
+        if (request == null) {
+            throw new RuntimeException("[BadRequest400] 400 : request is null");
+        } else if (request.getLimit() < 0) {
+            throw new RuntimeException("[BadRequest500] 500 : request limit cannot be -1");
+        }
         FollowerServiceImpl service = new FollowerServiceImpl();
         return service.getFollowers(request);
     }
-
 }

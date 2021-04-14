@@ -16,7 +16,7 @@ public class ChangeToFollowServiceImpl implements IFollowingStatusService {
     public FollowingStatusResponse getFollowingStatus(FollowingStatusRequest request) throws IOException, TweeterRemoteException {
         if (request == null) {
             throw new RuntimeException("[BadRequest400] 400");
-        } else if (request.getUser() == null && request.getFollowing() == null) {
+        } else if (request.getFollowerUser() == null || request.getFolloweeUser() == null || request.getFollowing() == null) {
             throw new RuntimeException("[BadRequest500] 500");
         }
         return changeToFollowDAO().changeToFollow(request);
