@@ -135,8 +135,8 @@ public class StoryTweetsFragment extends Fragment implements StoryTweetsPresente
          */
         void bindTweet(Tweet tweet) {
             userAlias.setText(tweet.getAlias());
-            userFullName.setText(tweet.getUser().getFirstName() + " " + tweet.getUser().getLastName());
             tweetText.setText(tweet.getTweetText());
+            userFullName.setText(tweet.getUser().getFirstName() + " " + tweet.getUser().getLastName());
             Bitmap tweetUserProfileImageBitmap = BitmapFactory.decodeByteArray(tweet.getUser().getImageBytes(), 0, tweet.getUser().getImageBytes().length);
             userImage.setImageBitmap(tweetUserProfileImageBitmap);
         }

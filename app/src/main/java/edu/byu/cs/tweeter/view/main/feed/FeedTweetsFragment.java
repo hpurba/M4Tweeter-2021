@@ -2,6 +2,8 @@ package edu.byu.cs.tweeter.view.main.feed;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -118,7 +120,7 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
     private class FeedTweetsHolder extends RecyclerView.ViewHolder {
 
         private ImageView userImage;
-        private TextView userName;
+        private TextView userFullName;
         private final TextView userAlias;
         private final TextView tweetText;
         private final Context context;
@@ -135,10 +137,12 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
             if(viewType == ITEM_VIEW) {
                 userAlias = itemView.findViewById(R.id.userAliasForTweet);
                 tweetText = itemView.findViewById(R.id.tweetTextInRow);
+                userFullName = itemView.findViewById(R.id.NameOfUser);
+                userImage = itemView.findViewById(R.id.userImageForTweet);
 
                 //
 //                userImage = itemView.findViewById(R.id.userImage);
-                userName = itemView.findViewById(R.id.userName);
+//                userName = itemView.findViewById(R.id.userName);
                 //
 
                 itemView.setOnClickListener(new View.OnClickListener() {
@@ -168,10 +172,13 @@ public class FeedTweetsFragment extends Fragment implements FeedTweetsPresenter.
          * @param tweet the tweet.
          */
         void bindTweet(Tweet tweet) {
-            if(tweet != null) {
+//            if(tweet != null) {
                 userAlias.setText(tweet.getAlias());
                 tweetText.setText(tweet.getTweetText());
-            }
+                userFullName.setText(tweet.getUser().getFirstName() + " " + tweet.getUser().getLastName());
+                Bitmap tweetUserProfileImageBitmap = BitmapFactory.decodeByteArray(tweet.getUser().getImageBytes(), 0, tweet.getUser().getImageBytes().length);
+                userImage.setImageBitmap(tweetUserProfileImageBitmap);
+//            }
 //            userName.setText(tweet.getUserName());
         }
     }

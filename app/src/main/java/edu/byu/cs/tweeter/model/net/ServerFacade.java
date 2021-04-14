@@ -160,9 +160,7 @@ public class ServerFacade {
      * @throws TweeterRemoteException
      */
     public FeedTweetsResponse getFeedTweets(FeedTweetsRequest request, String urlPath) throws IOException, TweeterRemoteException {
-
         FeedTweetsResponse response = clientCommunicator.doPost(urlPath, request, null, FeedTweetsResponse.class);
-
         if(response.isSuccess()) {
             return response;
         } else {
