@@ -12,6 +12,12 @@ import edu.byu.cs.tweeter.server.service.LogoutServiceImpl;
 public class LogoutHandler implements RequestHandler<LogoutRequest, LogoutResponse> {
     @Override
     public LogoutResponse handleRequest(LogoutRequest logoutRequest, Context context) {
+        if (logoutRequest == null) {
+            throw new RuntimeException("[BadRequest400] 400 : logoutRequest is null.");
+        } else if (logoutRequest.getAuthToken() == null) {
+            throw new RuntimeException("[BadRequest500] 500 : must have an authToken in request. Your AuthToken: " + logoutRequest.getAuthToken());
+        }
+
         LogoutServiceImpl logoutService = new LogoutServiceImpl();
         return logoutService.logout(logoutRequest);
     }

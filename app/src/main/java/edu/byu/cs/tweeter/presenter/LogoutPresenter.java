@@ -20,6 +20,7 @@ public class LogoutPresenter {
      */
     public interface View {
         String getUserAlias();
+        String getAuthToken();
     }
 
     /**
@@ -36,8 +37,7 @@ public class LogoutPresenter {
      * @throws IOException
      */
     public LogoutResponse logout() throws IOException {
-        LogoutRequest logoutRequest = new LogoutRequest(view.getUserAlias()); // Alias is the @username
-
+        LogoutRequest logoutRequest = new LogoutRequest(view.getUserAlias(), view.getAuthToken()); // Alias is the @username
         LogoutService logoutService = new LogoutService();
         return logoutService.logout(logoutRequest);
     }
