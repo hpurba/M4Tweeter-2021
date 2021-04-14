@@ -48,7 +48,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 return FollowingFragment.newInstance(user,otherUser, authToken);
             case 3:
-                return FollowersFragment.newInstance(user,authToken);
+                return FollowersFragment.newInstance(user,otherUser, authToken);
             default:
                 return null;
         }

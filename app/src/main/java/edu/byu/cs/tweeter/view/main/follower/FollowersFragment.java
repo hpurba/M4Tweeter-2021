@@ -35,7 +35,8 @@ import edu.byu.cs.tweeter.view.util.ImageUtils;
 public class FollowersFragment extends Fragment implements FollowerPresenter.View, OtherUserProfilePresenter.View, GetOtherUserProfileTask.Observer {
 
     private static final String LOG_TAG = "FollowersFragment";
-    private static final String USER_KEY = "UserKey";
+    private static final String CURRENT_USER_KEY = "CurrentUser";
+    public static final String OTHER_USER_KEY = "OtherUser";
     private static final String AUTH_TOKEN_KEY = "AuthTokenKey";
 
     private static final int LOADING_DATA_VIEW = 0;
@@ -44,6 +45,7 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
     private static final int PAGE_SIZE = 9;
 
     private User user;
+    private User otherUser;
     private String authToken;
     private FollowerPresenter presenter;
     private FollowersFragment followersFragment;
@@ -61,11 +63,12 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
      * @param authToken the auth token for this user's session.
      * @return the fragment.
      */
-    public static FollowersFragment newInstance(User user, String authToken) {
+    public static FollowersFragment newInstance(User user, User otherUser, String authToken) {
         FollowersFragment fragment = new FollowersFragment();
 
-        Bundle args = new Bundle(2);
-        args.putSerializable(USER_KEY, user);
+        Bundle args = new Bundle(3);
+        args.putSerializable(CURRENT_USER_KEY, user);
+        args.putSerializable(OTHER_USER_KEY, otherUser);
         args.putSerializable(AUTH_TOKEN_KEY, authToken);
 
         fragment.setArguments(args);
@@ -78,8 +81,9 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
         View view = inflater.inflate(R.layout.fragment_followers, container, false);
 
         //noinspection ConstantConditions
-        user = (User) getArguments().getSerializable(USER_KEY);
-//        authToken = (AuthToken) getArguments().getSerializable(AUTH_TOKEN_KEY);
+        user = (User) getArguments().getSerializable(CURRENT_USER_KEY); // USER_KEY
+        otherUser = (User) getArguments().getSerializable(OTHER_USER_KEY);
+        authToken = getArguments().getString(AUTH_TOKEN_KEY);
 
         rootView = this.getView();
 
@@ -132,6 +136,11 @@ public class FollowersFragment extends Fragment implements FollowerPresenter.Vie
     @Override
     public User getLastFollower() {
         return lastFollower;
+    }
+
+    @Override
+    public String getAuthToken() {
+        return authToken;
     }
 
     /**

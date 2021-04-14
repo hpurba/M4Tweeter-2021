@@ -41,7 +41,7 @@ public class OtherUserSectionsPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return FollowingFragment.newInstance(user, otherUser, authToken);
             case 2:
-                return FollowersFragment.newInstance(user,authToken);
+                return FollowersFragment.newInstance(user,otherUser, authToken);
             default:
                 return null;
         }

@@ -4,13 +4,12 @@ import edu.byu.cs.tweeter.model.domain.User;
 
 public class FollowerRequest {
 
-    public FollowerRequest() {};
-
     private User followee;
     private int limit;
     private User lastFollower;
     private String authToken;
 
+    public FollowerRequest() {};
     /**
      * Creates an instance.
      *
@@ -20,10 +19,11 @@ public class FollowerRequest {
      *                     there was no previous request or if no followers were returned in the
      *                     previous request).
      */
-    public FollowerRequest(User followee, int limit, User lastFollower) {
+    public FollowerRequest(User followee, int limit, User lastFollower, String authToken) {
         this.followee = followee;
         this.limit = limit;
         this.lastFollower = lastFollower;
+        this.authToken = authToken;
     }
 
     /**

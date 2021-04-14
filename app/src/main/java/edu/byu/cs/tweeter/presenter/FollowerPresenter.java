@@ -5,6 +5,7 @@ import java.io.IOException;
 import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.service.FollowerService;
 import edu.byu.cs.tweeter.model.service.request.FollowerRequest;
+import edu.byu.cs.tweeter.model.service.request.FollowingRequest;
 import edu.byu.cs.tweeter.model.service.response.FollowerResponse;
 
 public class FollowerPresenter {
@@ -21,6 +22,7 @@ public class FollowerPresenter {
         User getUser();
         int getPageSize();
         User getLastFollower();
+        String getAuthToken();
     }
 
     /**
@@ -37,7 +39,8 @@ public class FollowerPresenter {
      * @throws IOException
      */
     public FollowerResponse getFollowers() throws IOException {
-        FollowerRequest request = new FollowerRequest(view.getUser(), view.getPageSize(), view.getLastFollower());
+//        FollowerRequest request = new FollowerRequest(view.getUser(), view.getPageSize(), view.getLastFollower());
+        FollowerRequest request = new FollowerRequest(view.getUser(), view.getPageSize(), view.getLastFollower(), view.getAuthToken());
         FollowerService followerService = getFollowerService();
         return followerService.getFollowers(request);
     }
